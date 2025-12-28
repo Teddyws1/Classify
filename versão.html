@@ -4,21 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Classify</title>
-<script src="changelog.js" defer></script>
-    <link rel="stylesheet" href="changelog.css">
+    <script src="versão.js" defer></script>
+    <link rel="stylesheet" href="versão.css">
 </head>
 <body>
-    <h2>📦 Histórico completo de versões</h2>
+    <div class="container">
+        <header>
+            <h1>📦 Histórico de Versões</h1>
+            <p class="subtitle">Acompanhe todas as atualizações e melhorias do Classify</p>
+        </header>
 
-<div class="versions">
-  <button class="version-btn" data-version="1.3.0">Versão 1.3.0</button>
-  <button class="version-btn" data-version="1.2.0">Versão 1.2.0</button>
-  <button class="version-btn" data-version="1.1.0">Versão 1.1.0</button>
-</div>
+        <main class="versions-container" role="main" aria-label="Lista de versões">
+            <div class="versions-grid" id="versionsGrid">
+                <!-- Conteúdo preenchido via JavaScript -->
+            </div>
+        </main>
 
-<div id="versionDetails" class="details hidden"></div>
-
-<button class="back-btn" onclick="history.back()">← Voltar</button>
+        <nav aria-label="Navegação">
+            <button class="back-btn" onclick="history.back()" aria-label="Voltar para a página anterior">
+                <span class="arrow">←</span>
+                Voltar
+            </button>
+        </nav>
+    </div>
 
 </body>
 </html>

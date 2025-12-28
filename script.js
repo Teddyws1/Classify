@@ -5,9 +5,7 @@ cards.forEach((c) => {
   c.querySelector("span").innerText = `(${n} sites)`;
   total += n;
 });
-document.getElementById(
-  "total"
-).innerText = `�9�6 Total geral: ${total} ferramentas`;
+
 
 document.getElementById("search").addEventListener("keyup", (e) => {
   const v = e.target.value.toLowerCase();
@@ -35,7 +33,7 @@ document.querySelectorAll(".card ul li").forEach((li) => {
   // Botão compartilhar
   const btn = document.createElement("button");
   btn.className = "share-btn";
-  btn.innerHTML = "🔗";
+  btn.innerHTML = "<ion-icon name=\"link-outline\"></ion-icon>";
   btn.title = "Compartilhar";
 
   li.appendChild(btn);
@@ -50,10 +48,10 @@ document.querySelectorAll(".card ul li").forEach((li) => {
     const url = link.href;
 
     menu.innerHTML = `
-      <button onclick="copyLink('${url}')">📋 Copiar link</button>
-      <button onclick="shareWhats('${url}')">🟢 WhatsApp</button>
-      <button onclick="shareTwitter('${url}')">🐦 Twitter / X</button>
-      <button onclick="shareFacebook('${url}')">🔵 Facebook</button>
+      <button onclick="copyLink('${url}')"><ion-icon name="clipboard-outline"></ion-icon>Copiar link</button>
+      <button onclick="shareWhats('${url}')"><ion-icon name="logo-whatsapp"></ion-icon> WhatsApp</button>
+      <button onclick="shareTwitter('${url}')"><ion-icon name="logo-twitter"></ion-icon> Twitter / X</button>
+      <button onclick="shareFacebook('${url}')"><ion-icon name="logo-facebook"></ion-icon>  Facebook</button>
     `;
 
     li.appendChild(menu);
@@ -146,3 +144,6 @@ const menu = toggle.closest(".mini-menu");
 toggle.addEventListener("click", () => {
   menu.classList.toggle("open");
 });
+
+
+//sistede de seleção de texto
