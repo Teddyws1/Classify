@@ -119,6 +119,30 @@ document.getElementById("toggleTheme").onclick = () => {
 
 //sobre atualização
 
+const openUpdateInfo = document.getElementById("openUpdateInfo");
+const closeUpdateInfo = document.getElementById("closeUpdateInfo");
+const updateInfoModal = document.getElementById("updateInfoModal");
+
+openUpdateInfo.onclick = () => {
+  updateInfoModal.classList.add("active");
+};
+
+closeUpdateInfo.onclick = () => {
+  updateInfoModal.classList.remove("active");
+};
+
+// fecha ao clicar fora
+updateInfoModal.onclick = (e) => {
+  if (e.target === updateInfoModal) {
+    updateInfoModal.classList.remove("active");
+  }
+};
 
 
   //div ver mais vesão
+const toggle = document.getElementById("configToggle");
+const menu = toggle.closest(".mini-menu");
+
+toggle.addEventListener("click", () => {
+  menu.classList.toggle("open");
+});
