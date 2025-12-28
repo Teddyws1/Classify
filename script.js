@@ -170,4 +170,8 @@ toggle.addEventListener("click", () => {
 });
 
 
-//sistede de seleção de texto
+//sistema de registro da web app
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/Classify/sw.js')
+    .then(() => console.log('Service Worker registrado com sucesso!'));
+}
