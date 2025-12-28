@@ -1,0 +1,776 @@
+@charset "UTF-8";
+
+:root {
+    --bg: #0f172a;
+    --card: #111827;
+    --text: #e5e7eb;
+    --muted: #9ca3af;
+    --accent: #facc15;
+    --border: #1f2937;
+    --link: #38bdf8;
+}
+
+.light {
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --text: #0f172a;
+    --muted: #475569;
+    --accent: #f59e0b;
+    --border: #e5e7eb;
+    --link: #0284c7;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: Inter, system-ui, sans-serif;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    padding: 30px;
+    transition: 0.3s;
+}
+
+/* ================== HEADER ================== */
+.main-header {
+  max-width: 1300px;
+  margin: 0 auto 30px;
+  padding: 20px;
+  border-radius: 18px;
+  background: var(--card);
+  border: 1px solid var(--border);
+}
+
+/* Layout principal */
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Título */
+.title h1 {
+  margin: 0;
+  font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+  color: var(--accent);
+}
+
+.title p {
+  margin: 6px 0 0;
+  font-size: .9rem;
+  color: var(--muted);
+}
+
+/* ================== CONTROLS ================== */
+.controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Input */
+.controls input {
+  min-width: 220px;
+  width: 100%;
+  max-width: 280px;
+  padding: 12px 14px;
+  font-size: 1rem;
+  border-radius: 12px;
+}
+
+/* Botão */
+.controls button {
+  min-width: 48px;
+  min-height: 48px; /* área de toque mobile */
+  font-size: 1.2rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ================== MOBILE ================== */
+@media (max-width: 600px) {
+  .header-content {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .controls {
+    width: 100%;
+  }
+
+  .controls input {
+    max-width: 100%;
+  }
+
+  .controls button {
+    width: 100%;
+  }
+}
+
+/* ================== EXTRA PEQUENO (ex: 360px) ================== */
+@media (max-width: 380px) {
+  .controls button {
+    font-size: 1rem;
+  }
+}
+
+
+input,
+button {
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+}
+
+button {
+    cursor: pointer;
+    background: var(--accent);
+    color: #000;
+    font-weight: bold;
+}
+
+.grid {
+    max-width: 1300px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 18px;
+}
+
+.card h2 {
+    margin-top: 0;
+    color: var(--accent);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.card span {
+    font-size: 0.8rem;
+    color: var(--muted);
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+li img {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+}
+
+a {
+    color: var(--link);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+footer {
+    text-align: center;
+    margin-top: 40px;
+    color: var(--muted);
+}
+
+/* ================== SOCIAL FOOTER ================== */
+footer .social {
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+footer .social span {
+    font-size: .85rem;
+    opacity: .85;
+}
+
+footer .social a {
+    position: relative;
+}
+
+/* Ícones */
+footer .social img {
+    width: 18px;
+    height: 18px;
+    filter: invert(80%);
+    transition: .2s ease;
+}
+
+.light footer .social img {
+    filter: none;
+}
+
+footer .social a:hover img {
+    transform: scale(1.25);
+}
+
+/* Tooltip */
+footer .social a::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 130%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--card);
+    color: var(--text);
+    padding: 4px 8px;
+    font-size: .7rem;
+    border-radius: 6px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    border: 1px solid var(--border);
+    transition: .2s;
+}
+
+footer .social a:hover::after {
+    opacity: 1;
+}
+
+/* ITEM COM BOTÃO */
+.card ul li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  position: relative;
+  padding: 6px 0;
+}
+
+/* AGRUPA ÍCONE + TEXTO */
+.card ul li .tool-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* BOTÃO SHARE */
+.share-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.share-btn:hover {
+  color: var(--accent);
+}
+
+/* MENU DE OPÇÕES */
+.share-menu {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 6px;
+  min-width: 160px;
+  z-index: 20;
+}
+
+.share-menu button {
+  width: 100%;
+  background: none;
+  border: none;
+  color: var(--text);
+  padding: 6px 10px;
+  cursor: pointer;
+  text-align: left;
+  font-size: 14px;
+}
+
+.share-menu button:hover {
+  background: var(--border);
+  border-radius: 6px;
+}
+
+/* BOTÃO ABRIR */
+.open-sidebar {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  border: none;
+  background: var(--accent);
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: .3s;
+  z-index: 1002;
+}
+
+.open-sidebar.hide {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(.8);
+}
+
+/* OVERLAY */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: .35s;
+  z-index: 1000;
+}
+
+.overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* SIDEBAR */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -340px;
+  width: 320px;
+  height: 100%;
+  background: var(--card);
+  color: var(--text);
+  padding: 22px;
+  transition: .4s cubic-bezier(.4,0,.2,1);
+  z-index: 1001;
+}
+
+.sidebar.active {
+  left: 0;
+}
+
+/* FECHAR */
+.close-sidebar {
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 1.2rem;
+  cursor: pointer;
+  float: right;
+}
+
+/* TEXTO */
+.about-text {
+  color: var(--muted);
+  font-size: .92rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+
+  padding-left: 12px;
+  border-left: 3px solid var(--accent);
+
+  opacity: .9;
+}
+
+
+.section {
+  margin-bottom: 18px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .95rem;
+  margin-bottom: 12px;
+}
+
+/* Badge */
+.badge {
+  font-size: .7rem;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #000;
+  font-weight: 600;
+}
+
+/* Card */
+.idea-card {
+  background: rgba(255,255,255,0.05);
+  padding: 14px;
+  border-radius: 16px;
+}
+
+html.light .idea-card {
+  background: rgba(0,0,0,0.05);
+}
+
+/* Header */
+.idea-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.idea-header img {
+  width: 22px;
+  filter: invert(1);
+}
+
+html.light .idea-header img {
+  filter: invert(0);
+}
+
+.idea-header a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+/* Preview TikTok */
+.tiktok-preview {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #cfd306, #045c59);
+  color: rgb(34, 34, 34);
+  padding: 12px;
+  border-radius: 14px;
+  text-decoration: none;
+  font-size: .85rem;
+  font-weight: 600;
+  transition: .3s;
+}
+
+.tiktok-preview:hover {
+  transform: scale(1.03);
+}
+
+.play {
+  width: 32px;
+  height: 32px;
+  background: rgba(255,255,255,.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* CRIADOR */
+.creator span {
+  font-weight: bold;
+}
+
+/* REDES */
+.socials {
+  display: flex;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.socials a {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: rgba(255,255,255,.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: .25s;
+}
+
+.socials a:hover {
+  transform: translateY(-3px);
+  background: var(--accent);
+}
+
+.socials img {
+  width: 20px;
+  filter: invert(1);
+}
+
+html.light .socials img {
+  filter: invert(0);
+}
+
+/* BOTÃO TEMA */
+.theme-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  background: var(--accent);
+  cursor: pointer;
+  font-weight: bold;
+}
+
+
+/* versão do sistema */
+.app-version {
+  margin-top: 10px;
+  text-align: center;
+  font-size: .7rem;
+  color: var(--muted);
+}
+
+.app-version strong {
+  display: block;
+  color: var(--accent);
+  font-size: .8rem;
+}
+
+/* sobre atualização */
+/* ========== TOAST ========== */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 12px 16px;
+  border-radius: 14px;
+  font-size: .8rem;
+  font-weight: 500;
+
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+
+  transition: opacity .3s ease, transform .3s ease;
+  z-index: 9999;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* ========== MODAL BACKDROP ========== */
+.update-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .55);
+  backdrop-filter: blur(6px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
+
+  z-index: 9998;
+}
+
+.update-modal.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ========== MODAL BOX ========== */
+.modal-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+
+  width: 92%;
+  max-width: 460px;
+
+  padding: 22px;
+  position: relative;
+
+  animation: modalIn .3s ease;
+}
+
+/* animação de entrada */
+@keyframes modalIn {
+  from {
+    transform: scale(.95) translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ========== BOTÃO FECHAR ========== */
+.close-modal {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+
+  border: none;
+  background: none;
+  color: var(--muted);
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.close-modal:hover {
+  color: var(--text);
+}
+
+/* ========== TÍTULO ========== */
+.modal-box h3 {
+  margin: 0 0 14px;
+  font-size: 1rem;
+  color: var(--accent);
+}
+
+/* ========== LISTA DE ATUALIZAÇÕES ========== */
+.update-list {
+  padding-left: 18px;
+  margin: 0 0 14px;
+  font-size: .85rem;
+  color: var(--text);
+}
+
+.update-list li {
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+/* ========== VERSÃO ATUAL ========== */
+.current-version {
+  text-align: center;
+  font-size: .75rem;
+  color: var(--muted);
+  margin-top: 10px;
+}
+
+.current-version strong {
+  color: var(--accent);
+}
+
+/* ========== LINK MAIS ATUALIZAÇÕES ========== */
+.more-updates {
+  display: block;
+  margin-top: 16px;
+  text-align: center;
+
+  font-size: .8rem;
+  font-weight: 500;
+  text-decoration: none;
+
+  color: var(--link);
+}
+
+.more-updates:hover {
+  text-decoration: underline;
+}
+
+/* botão new */
+.update-badge {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 9px 16px;
+
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .3px;
+
+  color: #fff;
+  background: linear-gradient(135deg, #ff4d4f, #ff8c42);
+
+  border: none;
+  border-radius: 999px;
+
+  cursor: pointer;
+  z-index: 9999;
+
+  box-shadow: 
+    0 6px 16px rgba(255, 77, 79, .35),
+    inset 0 0 0 1px rgba(255,255,255,.15);
+
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease,
+    filter .18s ease;
+}
+
+/* Hover */
+.update-badge:hover {
+  transform: translateY(-1px) scale(1.04);
+  filter: brightness(1.05);
+  box-shadow: 
+    0 10px 24px rgba(255, 77, 79, .45),
+    inset 0 0 0 1px rgba(255,255,255,.25);
+}
+
+/* Click */
+.update-badge:active {
+  transform: scale(.96);
+}
+
+/* Acessibilidade */
+.update-badge:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 3px rgba(255, 140, 66, .45),
+    0 10px 24px rgba(255, 77, 79, .45);
+}
+
+/* Animação sutil de destaque */
+@keyframes badgePulse {
+  0%   { box-shadow: 0 0 0 0 rgba(255,77,79,.45); }
+  70%  { box-shadow: 0 0 0 10px rgba(255,77,79,0); }
+  100% { box-shadow: 0 0 0 0 rgba(255,77,79,0); }
+}
+
+.update-badge.pulse {
+  animation: badgePulse 2.5s infinite;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .update-badge {
+    top: 12px;
+    right: 12px;
+    padding: 8px 14px;
+    font-size: .7rem;
+  }
+}
+
+
+/*fim modal sobre atualização */
+

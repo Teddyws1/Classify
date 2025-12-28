@@ -1,0 +1,19 @@
+[
+  {
+    "version": "1.4.3",
+    "date": "2025-01-20 18:40",
+    "changes": [
+      "Toast notification ao abrir o site",
+      "Changelog via JSON externo",
+      "Badge NEW persistente"
+    ]
+  },
+  {
+    "version": "1.4.2",
+    "date": "2025-01-18 21:10",
+    "changes": [
+      "Sidebar animada",
+      "Tema claro / escuro"
+    ]
+  }
+]
