@@ -1,6 +1,18 @@
  // Dados das versões (substitua pelos seus dados reais)
         const versionsData = [
             {
+                version: "1.4.0",
+                date: "28/12/2025",
+                isCurrent: false,
+                summary: "Performance e estabilidade e novo sistema de versões",
+                changes: [
+                    { type: "improvement", text: "Interface mais organizada" },
+                    { type: "fix", text: "Correções de bugs gerais" },
+                    { type: "feature", text: "nova aba de versões" },
+                   
+                ]
+            },
+            {
                 version: "1.3.0",
                 date: "28/12/2025",
                 isCurrent: true,

@@ -38,13 +38,16 @@ body {
 
 /* ================== HEADER ================== */
 .main-header {
-  max-width: 1300px;
+  max-width: calc(1300px - var(--sidebar-space));
   margin: 0 auto 30px;
+  margin-left: 21%;
   padding: 20px;
+  text-align: center;
   border-radius: 18px;
   background: var(--card);
   border: 1px solid var(--border);
 }
+
 
 /* Layout principal */
 .header-content {
@@ -52,8 +55,9 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
+
 
 /* Título */
 .title h1 {
@@ -329,13 +333,17 @@ footer .social a:hover::after {
   left: 3px;
   width: 48px;
   height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 14px;
   border: none;
   background: var(--accent);
   font-size: 1.5rem;
+  line-height: 1;
   cursor: pointer;
   transition: .3s;
-  z-index: 1002;
+  z-index: 999;
 }
 
 .open-sidebar.hide {
@@ -343,6 +351,7 @@ footer .social a:hover::after {
   pointer-events: none;
   transform: scale(.8);
 }
+
 
 /* OVERLAY */
 .overlay {
@@ -538,7 +547,7 @@ html.light .socials img {
   max-width: 220px;
   border-radius: 14px;
   border: none;
- 
+
   color: #111;
   font-size: .78rem;
   font-weight: 600;
@@ -756,3 +765,88 @@ html.light .socials img {
     font-size: .65rem;
   }
 }
+
+/* icone do span 5sites */
+.card h2 span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.card h2 span ion-icon {
+  font-size: 1rem;
+}
+
+/* icon de compartilhar */
+.share-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 6px;
+  border-radius: 6px;
+  color: #cfd306;
+
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.share-btn ion-icon {
+  font-size: 18px;
+}
+
+.share-btn:hover {
+  background: var(--hover-bg);
+  color: var(--text-primary);
+}
+
+/* painel de compartilhar */
+.share-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+  min-width: 200px;
+  color: var(--bg);
+  background: #9291917a;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.15),
+    0 2px 6px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+  overflow: hidden;
+  backdrop-filter: blur(6px);
+  animation: fadeSlide 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: top right;
+}
+.share-menu::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  right: 14px;
+  width: 12px;
+  height: 12px;
+  background: var(--card-bg);
+  border-left: 1px solid var(--border);
+  border-top: 1px solid var(--border);
+  transform: rotate(45deg);
+}
+
+
+/* animação */
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* notificação de copia */

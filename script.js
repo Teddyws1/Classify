@@ -1,10 +1,15 @@
 const cards = document.querySelectorAll("[data-category]");
-let total = 0;
 cards.forEach((c) => {
   const n = c.querySelectorAll("li").length;
-  c.querySelector("span").innerText = `(${n} sites)`;
+
+  c.querySelector("span").innerHTML = `
+    ${n} sites <ion-icon name="globe-outline"></ion-icon>
+  `;
+
   total += n;
 });
+
+
 
 
 document.getElementById("search").addEventListener("keyup", (e) => {
@@ -62,6 +67,25 @@ document.querySelectorAll(".card ul li").forEach((li) => {
 function removeMenus() {
   document.querySelectorAll(".share-menu").forEach((m) => m.remove());
 }
+
+const openSidebarBtn = document.getElementById("openSidebar");
+
+let lastScroll = window.scrollY;
+
+window.addEventListener("scroll", () => {
+  const currentScroll = window.scrollY;
+
+  if (currentScroll > lastScroll && currentScroll > 10) {
+    // rolando para baixo → esconde
+    openSidebarBtn.classList.add("hide");
+  } else {
+    // rolando para cima → mostra
+    openSidebarBtn.classList.remove("hide");
+  }
+
+  lastScroll = currentScroll;
+});
+
 
 document.addEventListener("click", removeMenus);
 

@@ -6,11 +6,19 @@
     <title>Classify</title>
     <script src="versão.js" defer></script>
     <link rel="stylesheet" href="versão.css">
+     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  </head>
 </head>
 <body>
+    <br>
+      <button class="back-btn" onclick="history.back()" aria-label="Voltar para a página anterior">
+                <span class="arrow">←</span>
+                Voltar
+            </button>
     <div class="container">
         <header>
-            <h1>📦 Histórico de Versões</h1>
+            <h1><ion-icon name="cloud-upload-outline" id="cloud-upload-outline"></ion-icon> Histórico de Versões <ion-icon name="cloud-download-outline"></ion-icon></h1>
             <p class="subtitle">Acompanhe todas as atualizações e melhorias do Classify</p>
         </header>
 
@@ -21,10 +29,7 @@
         </main>
 
         <nav aria-label="Navegação">
-            <button class="back-btn" onclick="history.back()" aria-label="Voltar para a página anterior">
-                <span class="arrow">←</span>
-                Voltar
-            </button>
+    
         </nav>
     </div>
 
