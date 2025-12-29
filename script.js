@@ -196,25 +196,6 @@ document.addEventListener("keydown", e => {
   if (e.key === "Escape") unlockScroll();
 });
 
-//para mobile
-function preventScroll(e) {
-  e.preventDefault();
-}
-
-function lockScroll() {
-  document.body.classList.add("no-scroll");
-  document.addEventListener("touchmove", preventScroll, { passive: false });
-}
-
-function unlockScroll() {
-  document.body.classList.remove("no-scroll");
-  document.removeEventListener("touchmove", preventScroll);
-}
-
-openSidebarBtn.addEventListener("click", lockScroll);
-closeSidebarBtn.addEventListener("click", unlockScroll);
-
-
 //sobre atualização
 
 const openUpdateInfo = document.getElementById("openUpdateInfo");
@@ -237,28 +218,60 @@ updateInfoModal.onclick = (e) => {
 };
 
 
-  //div ver mais vesão
-const toggle = document.getElementById("configToggle");
-const menu = toggle.closest(".mini-menu");
+// bloqueia zoom com CTRL + scroll (PC)
+document.addEventListener("wheel", function (e) {
+  if (e.ctrlKey) {
+    e.preventDefault();
+  }
+}, { passive: false });
 
-toggle.addEventListener("click", () => {
-  menu.classList.toggle("open");
+// bloqueia zoom com CTRL + + / -
+document.addEventListener("keydown", function (e) {
+  if (e.ctrlKey && (
+    e.key === "+" ||
+    e.key === "-" ||
+    e.key === "="
+  )) {
+    e.preventDefault();
+  }
+});
+
+// bloqueia zoom por pinça (iOS)
+document.addEventListener("gesturestart", function (e) {
+  e.preventDefault();
 });
 
 
-//sistema de registro da web app
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/Classify/sw.js')
-    .then(() => console.log('Service Worker registrado com sucesso!'));
-}
+  //sistema de card de aviso
+document.addEventListener("DOMContentLoaded", () => {
+  const overlay = document.getElementById("update-notice");
+  const closeBtn = document.getElementById("close-notice");
 
-//animação do kittok 
-document.querySelectorAll(".update-list .toggle-more").forEach((btn) => {
-  btn.addEventListener("click", () => {
-    const li = btn.closest("li");
-    li.classList.toggle("open");
-    btn.textContent = li.classList.contains("open")
-      ? "Ver menos"
-      : "Ver mais";
+  if (!overlay || !closeBtn) return;
+
+  function lockScroll() {
+    document.body.classList.add("no-scroll");
+  }
+
+  function unlockScroll() {
+    document.body.classList.remove("no-scroll");
+  }
+
+  // abre o aviso
+  overlay.style.display = "flex";
+  lockScroll();
+
+  // botão "Entendi"
+  closeBtn.addEventListener("click", () => {
+    overlay.style.display = "none";
+    unlockScroll();
+  });
+
+  // clique fora do card
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) {
+      overlay.style.display = "none";
+      unlockScroll();
+    }
   });
 });

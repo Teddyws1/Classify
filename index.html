@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <title>Classify IA</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport"
+  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css" />
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
@@ -116,50 +119,18 @@
 
     <h3><ion-icon name="cloud-upload-outline" id="cloud-upload-outline"></ion-icon> Atualização atual</h3>
    <ul class="update-list">
-  <li>
-    A pesquisa agora considera apenas o nome das ferramentas
-    (<code>&lt;li&gt;&lt;a&gt;</code>)
-  </li>
-
-  <li>
-    Evita resultados incorretos ao buscar textos genéricos
-  </li>
-
-  <li>
-    🎯 Filtragem inteligente
-  </li>
-
-  <li>
-    Apenas ferramentas compatíveis permanecem visíveis
-  </li>
-
-  <li>
-    Categorias sem resultados são ocultadas automaticamente
-  </li>
-
-  <li>
-    ✨ Destaque do termo pesquisado com realce visual que melhora
-    significativamente a leitura e identificação do resultado,
-    especialmente em listas longas ou com muitas ferramentas
-  </li>
-
-  <li>
-    🎨 Visual aprimorado com novo estilo aplicado aos itens,
-    utilizando gradientes, sombras e animações suaves para
-    proporcionar melhor feedback visual ao usuário
-  </li>
-
-  <li>
-    🧠 Código otimizado com JavaScript mais limpo, organizado
-    e fácil de manter, mantendo total compatibilidade com
-    versões anteriores
-  </li>
-
-  <li>
-    🌙 Compatibilidade mantida com funcionamento correto
-    em modo claro e escuro, sem nenhuma quebra de layout
-    existente
-  </li>
+  <li>Adicionado card de “Aviso importante” exibido ao atualizar a página</li>
+  <li>Correção e melhoria do texto informativo com português revisado</li>
+  <li>Implementado fechamento do aviso ao clicar fora do card</li>
+  <li>Sistema de bloqueio de scroll ativado enquanto o aviso estiver aberto</li>
+  <li>Scroll da página restaurado automaticamente ao fechar o aviso</li>
+  <li>Compatibilidade garantida para mobile, tablet e desktop</li>
+  <li>Implementado sistema anti-zoom para evitar zoom acidental</li>
+  <li>Bloqueio de zoom por pinça, double-tap e atalhos de teclado</li>
+  <li>Visual do card aprimorado com gradientes, sombras e animações</li>
+  <li>Ícone de aviso integrado usando Ionicons</li>
+  <li>Código JavaScript organizado e otimizado</li>
+  <li>Nenhuma quebra de layout existente</li>
 </ul>
 
 
@@ -728,7 +699,27 @@
       </div>
     </section>
 
-    
+    <!--sistema de card-->
+  <div id="update-notice" class="update-notice">
+  <div class="notice-card">
+<h3>
+  <ion-icon name="warning-outline"></ion-icon>
+  Aviso importante
+</h3>
+
+
+
+    <p>
+      Caso você não perceba as novas atualizações, limpe o cache do navegador.
+      <br><br>
+      No momento, ainda estamos desenvolvendo um sistema que fará a limpeza
+      do cache do site automaticamente em futuras atualizações.
+    </p>
+    <button id="close-notice" type="button">Entendi</button>
+  </div>
+</div>
+
+<!--fim do sistema de card-->
 
     <footer>
       <p><ion-icon name="pricetags-outline"></ion-icon> 16 categorias • <ion-icon name="hammer-outline"></ion-icon> 80 ferramentas • <ion-icon name="link-outline"></ion-icon> Links oficiais</p>

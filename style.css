@@ -25,6 +25,11 @@
   font-family: Inter, system-ui, sans-serif;
 }
 
+html, body {
+  touch-action: manipulation;
+}
+
+
 body {
   margin: 0;
   background: var(--bg);
@@ -392,11 +397,11 @@ footer .social a:hover::after {
   position: fixed;
   top: 0;
   left: -340px;
-  width: 320px;
+  width: 296px;
   height: 100%;
   background: var(--card);
   color: var(--text);
-  padding: 22px;
+  padding:22px 22px 22px 5px;
   transition: .4s cubic-bezier(.4, 0, .2, 1);
   z-index: 1001;
 }
@@ -993,4 +998,101 @@ html.light .socials img {
   }
 }
 
-/* notificação de copia */
+/* do sistema de card */
+
+
+/*========fim do sistema de card========*/
+.update-notice {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.update-notice {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 15, 15, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  backdrop-filter: blur(4px);
+}
+
+.notice-card {
+  background: linear-gradient(145deg, #161616, #1e1e1e);
+  color: #f1f1f1;
+  padding: 22px 24px;
+  max-width: 440px;
+  width: calc(100% - 32px);
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 25px 50px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  animation: noticeIn 0.35s ease;
+}
+
+@keyframes noticeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.notice-card h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 12px;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.notice-card h3 ion-icon {
+  font-size: 1.25rem;
+  color: #f59e0b;
+}
+
+.notice-card p {
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: #d1d1d1;
+  margin: 0;
+}
+
+.notice-card button {
+  margin-top: 18px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f59e0b, #fbbf24);
+  color: #111;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  position: relative;
+  left: 82%;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.notice-card button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(245, 158, 11, 0.4);
+}
+
+.notice-card button:active {
+  transform: scale(0.97);
+}
+.no-scroll {
+  overflow: hidden;
+  height: 100vh;
+}
