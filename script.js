@@ -138,6 +138,49 @@ document.getElementById("toggleTheme").onclick = () => {
   html.classList.toggle("light");
 };
 
+const closeSidebarBtn = document.getElementById("closeSidebar");
+
+/* FUNÇÕES CLARAS */
+function lockScroll() {
+  document.body.classList.add("no-scroll");
+}
+
+function unlockScroll() {
+  document.body.classList.remove("no-scroll");
+}
+
+/* EVENTOS */
+openSidebarBtn.addEventListener("click", () => {
+  lockScroll();
+});
+
+closeSidebarBtn.addEventListener("click", () => {
+  unlockScroll();
+});
+
+overlay.addEventListener("click", unlockScroll);
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") unlockScroll();
+});
+
+//para mobile
+function preventScroll(e) {
+  e.preventDefault();
+}
+
+function lockScroll() {
+  document.body.classList.add("no-scroll");
+  document.addEventListener("touchmove", preventScroll, { passive: false });
+}
+
+function unlockScroll() {
+  document.body.classList.remove("no-scroll");
+  document.removeEventListener("touchmove", preventScroll);
+}
+
+openSidebarBtn.addEventListener("click", lockScroll);
+closeSidebarBtn.addEventListener("click", unlockScroll);
+
 
 //sobre atualização
 

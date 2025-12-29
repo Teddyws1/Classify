@@ -35,7 +35,10 @@ body {
     -webkit-user-select: none;
     -ms-user-select: none;
 }
-
+/* trava scroll da página */
+body.no-scroll {
+  overflow: hidden;
+}
 /* ================== HEADER ================== */
 .main-header {
   max-width: calc(1300px - var(--sidebar-space));
