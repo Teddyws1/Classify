@@ -180,8 +180,9 @@ button {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 16px;
-  padding: 18px;
+  padding: 18px; /* era 18px → +2px */
 }
+
 
 .card h2 {
   margin-top: 0;
@@ -198,10 +199,6 @@ button {
 }
 
 /* altura aproximada de um <li> = 26px (ajuste se quiser) */
-.card ul {
-  max-height: calc(26px * 5 + 32px); /* 5 itens + margem */
-  overflow-y: auto;
-}
 
 /* Firefox */
 .card ul {
@@ -325,6 +322,7 @@ footer .social a:hover::after {
   gap: 10px;
   position: relative;
   padding: 6px 0;
+  
 }
 
 /* AGRUPA ÍCONE + TEXTO */
@@ -341,6 +339,7 @@ footer .social a:hover::after {
   cursor: pointer;
   font-size: 15px;
   color: var(--muted);
+  
 }
 
 .share-btn:hover {
@@ -357,7 +356,8 @@ footer .social a:hover::after {
   border-radius: 10px;
   padding: 6px;
   min-width: 160px;
-  z-index: 20;
+position: relative;
+  z-index: 0;
 }
 
 .share-menu button {
@@ -369,6 +369,8 @@ footer .social a:hover::after {
   cursor: pointer;
   text-align: left;
   font-size: 14px;
+  position: relative;
+  z-index: 0;
 }
 
 .share-menu button:hover {
@@ -930,6 +932,9 @@ html.light .socials img {
 /* icon de compartilhar */
 .share-btn {
   all: unset;
+  position: absolute;        /* 🔥 tira do fluxo */
+  right: 12px;               /* posição real */
+  top: 50%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -937,14 +942,9 @@ html.light .socials img {
   height: 28px;
   border-radius: 8px;
   cursor: pointer;
-  position: relative;
-  right: 56px;
   background: #f59e0b;
   border: 1px solid var(--border);
-  transition:
-    background 0.15s ease,
-    transform 0.15s ease,
-    box-shadow 0.15s ease;
+  z-index: 2;
 }
 
 /* ÍCONE */
@@ -985,7 +985,7 @@ html.light .socials img {
 
 /* painel de compartilhar */
 .share-menu {
-  position: absolute;
+  position: relative;
   top: 100%;
   right: 0;
   margin-top: 8px;
@@ -1000,7 +1000,7 @@ html.light .socials img {
   z-index: 1000;
   overflow: hidden;
   backdrop-filter: blur(6px);
-  animation: fadeSlide 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeSlide 0.25s ease forwards;
   transform-origin: top right;
 }
 .share-menu::before {
@@ -1131,54 +1131,54 @@ html.light .socials img {
 /* novos ias */
 /* BADGE */
 .ia-badge {
-  position: absolute;
-  top: 10px;
-  right: 35%;
-  font-size: 0.55rem;
+position: absolute;
+  font-size: clamp(0.5rem, 1vw, 0.55rem);
   font-weight: 800;
   padding: 2px 6px;
   border-radius: 999px;
   background: var(--accent-main);
   color: #111;
+  white-space: nowrap;
 }
 
+
+/* ÍCONE */
 .ia-badge ion-icon {
-  font-size: 0.85rem;
+  font-size: clamp(0.7rem, 1.2vw, 0.85rem);
   margin-right: 2px;
   vertical-align: middle;
   color: #ffffff;
   animation: badgePulse 1.6s ease-in-out infinite;
 }
-
-/* ANIMAÇÃO SUAVE */
-@keyframes badgePulse {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.15);
-    opacity: 0.85;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .ia-badge ion-icon {
-    animation: none;
-  }
-}
-
-
-
-/* MOBILE */
+/* MOBILE PEQUENO (até 480px) */
 @media (max-width: 480px) {
-  .ia-category {
-    display: none;
+  .ia-badge {
+    top: 6px;
+    right: 25%;
+
+    font-size: 0.5rem;
+    padding: 2px 5px;
   }
 }
+/*TABLET / MOBILE GRANDE (até 768px)*/
+@media (max-width: 768px) {
+  .ia-badge {
+    top: 8px;
+    right:33%;
+    font-size: 0.52rem;
+  }
+}
+
+/* NOTEBOOK / TELAS MÉDIAS (até 1200px) */
+@media (max-width: 1200px) {
+  .ia-badge {
+    top: 6px;
+    right: 35%;
+  }
+}
+
+
+
 /* ÍCONE */
 .ia-list img {
   width: 18px;
