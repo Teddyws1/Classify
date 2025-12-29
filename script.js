@@ -9,9 +9,6 @@ cards.forEach((c) => {
   total += n;
 });
 
-
-
-
 const searchInput = document.getElementById("search");
 searchInput.addEventListener("keyup", () => {
   const value = searchInput.value.toLowerCase();
@@ -229,7 +226,7 @@ document.addEventListener("DOMContentLoaded", () => {
       unlockScroll();
     }
   });
-});
+}); 
 
 // Adição de novos sites
 const DAYS_NEW = 30;

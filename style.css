@@ -349,6 +349,7 @@ footer .social a:hover::after {
   border-radius: 6px;
 }
 
+
 /* BOTÃO ABRIR */
 .open-sidebar {
   position: fixed;
@@ -538,7 +539,7 @@ html.light .idea-header img {
 .segui {
   color: var(--accent);
   position: absolute;
-  top: 65%;
+  top: 74%;
   left: 35%;
 }
 
@@ -548,7 +549,7 @@ html.light .idea-header img {
   align-items: center;       
   justify-content: center;   
   gap: 14px;
-  margin-top: 15%;
+  margin-top: 42%;
 }
 
 .socials a:hover {
@@ -578,8 +579,8 @@ html.light .socials img {
   max-width: 220px;
   border-radius: 14px;
   border: none;
-
   color: #111;
+  background: var(--accent);
   font-size: .78rem;
   font-weight: 600;
   cursor: pointer;

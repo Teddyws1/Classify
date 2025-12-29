@@ -1,4 +1,4 @@
 # Classify
 IA pronto para uso
 
-vers do cógd:0.0.11 v
+vers do cógd:0.0.12 v
