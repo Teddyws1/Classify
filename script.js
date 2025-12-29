@@ -12,15 +12,48 @@ cards.forEach((c) => {
 
 
 
-document.getElementById("search").addEventListener("keyup", (e) => {
-  const v = e.target.value.toLowerCase();
-  cards.forEach((c) => {
-    c.style.display = c.innerText.toLowerCase().includes(v) ? "block" : "none";
+const searchInput = document.getElementById("search");
+searchInput.addEventListener("keyup", () => {
+  const value = searchInput.value.toLowerCase();
+
+  cards.forEach((card) => {
+    const lis = card.querySelectorAll("li");
+    let cardHasMatch = false;
+
+    lis.forEach((li) => {
+      const link = li.querySelector("a");
+      const name = link.innerText;
+      const lower = name.toLowerCase();
+
+      // remove destaque anterior
+      link.innerHTML = name;
+
+      if (lower.includes(value) && value !== "") {
+        const start = lower.indexOf(value);
+        const end = start + value.length;
+
+        link.innerHTML =
+          name.substring(0, start) +
+          `<mark>${name.substring(start, end)}</mark>` +
+          name.substring(end);
+
+        li.style.display = "flex";
+        cardHasMatch = true;
+      } else if (value === "") {
+        li.style.display = "flex";
+      } else {
+        li.style.display = "none";
+      }
+    });
+
+    card.style.display = cardHasMatch || value === "" ? "block" : "none";
   });
 });
+
 function toggleTheme() {
   document.body.classList.toggle("light");
 }
+
 
 // Prepara todos os <li>
 document.querySelectorAll(".card ul li").forEach((li) => {
@@ -220,3 +253,12 @@ if ('serviceWorker' in navigator) {
 }
 
 //animação do kittok 
+document.querySelectorAll(".update-list .toggle-more").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const li = btn.closest("li");
+    li.classList.toggle("open");
+    btn.textContent = li.classList.contains("open")
+      ? "Ver menos"
+      : "Ver mais";
+  });
+});

@@ -1,6 +1,52 @@
  // Dados das versões (substitua pelos seus dados reais)
         const versionsData = [
             {
+  version: "1.4.1",
+  date: "29/12/2025",
+  isCurrent: true,
+  summary: "Melhorias na pesquisa, filtragem e visual dos resultados",
+  changes: [
+    {
+      type: "improvement",
+      text: "A pesquisa agora considera apenas o nome das ferramentas (<li><a>)"
+    },
+    {
+      type: "fix",
+      text: "Evita resultados incorretos ao buscar textos genéricos"
+    },
+    {
+      type: "feature",
+      text: "Filtragem inteligente exibindo apenas ferramentas compatíveis"
+    },
+    {
+      type: "feature",
+      text: "Categorias sem resultados são ocultadas automaticamente"
+    },
+    {
+      type: "feature",
+      text: "Destaque visual do termo pesquisado usando <mark>"
+    },
+    {
+      type: "improvement",
+      text: "Novo estilo visual para os itens (tiktok-preview)"
+    },
+    {
+      type: "improvement",
+      text: "Gradientes, sombras e animações suaves para melhor feedback"
+    },
+    {
+      type: "improvement",
+      text: "JavaScript mais limpo e organizado mantendo compatibilidade total"
+    },
+    {
+      type: "fix",
+      text: "Nenhuma quebra de layout existente e suporte a modo claro e escuro"
+    }
+  ]
+}
+
+            ,
+            {
                 version: "1.4.0",
                 date: "28/12/2025",
                 isCurrent: false,
