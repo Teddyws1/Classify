@@ -538,8 +538,8 @@ html.light .idea-header img {
 .segui {
   color: var(--accent);
   position: absolute;
-  top: 72%;
-left: 30%;
+  top: 65%;
+  left: 35%;
 }
 
 /* REDES */
@@ -548,7 +548,7 @@ left: 30%;
   align-items: center;       
   justify-content: center;   
   gap: 14px;
-  margin-top: 42%;
+  margin-top: 15%;
 }
 
 .socials a:hover {
@@ -674,27 +674,7 @@ html.light .socials img {
 }
 
 
-/* sobre atualização */
 
-.update-info-btn {
-  display: block;
-  position: absolute;
-  top: 88%;
-  margin: 16px auto 0;
-  padding: 9px 16px;
-  width: auto;
-  min-width: 132px;
-  max-width: 220px;
-  border-radius: 14px;
-  border: none;
-  background: linear-gradient(135deg, #facc15, #f59e0b);
-  color: #111;
-  font-size: .78rem;
-  font-weight: 600;
-  cursor: pointer;
-  text-align: center; 
-  transition: transform .2s ease, box-shadow .2s ease;
-}
 
 #Sobre {
   color: #facc15;
@@ -811,21 +791,6 @@ html.light .socials img {
   cursor: pointer;
 }
 
-
-/* LINK */
-.see-all-versions {
-  display: block;
-  margin-top: 14px;
-  text-align: center;
-  font-size: .75rem;
-  color: var(--accent);
-  text-decoration: none;
-}
-
-.see-all-versions:hover {
-  text-decoration: underline;
-}
- 
 .idea-header {
   display: flex;
   align-items: center;
@@ -929,28 +894,59 @@ html.light .socials img {
 
 /* icon de compartilhar */
 .share-btn {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-
+  all: unset;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
-  padding: 6px;
-  border-radius: 6px;
-  color: #cfd306;
-  transition: background 0.2s ease, color 0.2s ease;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  cursor: pointer;
+  position: relative;
+  right: 56px;
+  background: #f59e0b;
+  border: 1px solid var(--border);
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
+/* ÍCONE */
 .share-btn ion-icon {
-  font-size: 18px;
+  font-size: 1rem;
+  color: var(--text);
 }
 
+/* HOVER */
 .share-btn:hover {
-  background: var(--hover-bg);
-  color: var(--text-primary);
+  background: rgba(139, 130, 4, 0.274);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
 }
+
+/* ACTIVE */
+.share-btn:active {
+  transform: scale(0.94);
+}
+
+/* FOCUS (acessibilidade) */
+.share-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* MOBILE */
+@media (max-width: 480px) {
+  .share-btn {
+    width: 26px;
+    height: 26px;
+  }
+
+  .share-btn ion-icon {
+    font-size: 0.95rem;
+  }
+}
+
 
 /* painel de compartilhar */
 .share-menu {
@@ -1095,4 +1091,63 @@ html.light .socials img {
 .no-scroll {
   overflow: hidden;
   height: 100vh;
+}
+
+/* novos ias */
+/* BADGE */
+.ia-badge {
+  position: absolute;
+  top: 11px;
+  right: -13px;
+  font-size: 0.55rem;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: var(--accent-main);
+  color: #111;
+}
+
+.ia-badge ion-icon {
+  font-size: 0.85rem;
+  margin-right: 2px;
+  vertical-align: middle;
+  color: #ffffff;
+  animation: badgePulse 1.6s ease-in-out infinite;
+}
+
+/* ANIMAÇÃO SUAVE */
+@keyframes badgePulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.85;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ia-badge ion-icon {
+    animation: none;
+  }
+}
+
+
+
+/* MOBILE */
+@media (max-width: 480px) {
+  .ia-category {
+    display: none;
+  }
+}
+/* ÍCONE */
+.ia-list img {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  background: #fff;
 }

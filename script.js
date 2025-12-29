@@ -196,51 +196,6 @@ document.addEventListener("keydown", e => {
   if (e.key === "Escape") unlockScroll();
 });
 
-//sobre atualização
-
-const openUpdateInfo = document.getElementById("openUpdateInfo");
-const closeUpdateInfo = document.getElementById("closeUpdateInfo");
-const updateInfoModal = document.getElementById("updateInfoModal");
-
-openUpdateInfo.onclick = () => {
-  updateInfoModal.classList.add("active");
-};
-
-closeUpdateInfo.onclick = () => {
-  updateInfoModal.classList.remove("active");
-};
-
-// fecha ao clicar fora
-updateInfoModal.onclick = (e) => {
-  if (e.target === updateInfoModal) {
-    updateInfoModal.classList.remove("active");
-  }
-};
-
-
-// bloqueia zoom com CTRL + scroll (PC)
-document.addEventListener("wheel", function (e) {
-  if (e.ctrlKey) {
-    e.preventDefault();
-  }
-}, { passive: false });
-
-// bloqueia zoom com CTRL + + / -
-document.addEventListener("keydown", function (e) {
-  if (e.ctrlKey && (
-    e.key === "+" ||
-    e.key === "-" ||
-    e.key === "="
-  )) {
-    e.preventDefault();
-  }
-});
-
-// bloqueia zoom por pinça (iOS)
-document.addEventListener("gesturestart", function (e) {
-  e.preventDefault();
-});
-
 
   //sistema de card de aviso
 document.addEventListener("DOMContentLoaded", () => {
@@ -275,3 +230,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+// Adição de novos sites
+const DAYS_NEW = 30;
+
+document.querySelectorAll(".ia-list li").forEach((li) => {
+  const added = li.dataset.added;
+  if (!added) return;
+
+  const addedDate = new Date(added);
+  const today = new Date();
+  const diffDays = (today - addedDate) / (1000 * 60 * 60 * 24);
+
+  const badge = li.querySelector(".ia-badge");
+
+  if (diffDays > DAYS_NEW && badge) {
+    badge.remove();
+  }
+});
+
+
