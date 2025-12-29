@@ -175,3 +175,5 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/Classify/sw.js')
     .then(() => console.log('Service Worker registrado com sucesso!'));
 }
+
+//animação do kittok 
