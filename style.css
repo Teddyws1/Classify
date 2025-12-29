@@ -197,6 +197,33 @@ button {
   color: var(--muted);
 }
 
+/* altura aproximada de um <li> = 26px (ajuste se quiser) */
+.card ul {
+  max-height: calc(26px * 5 + 32px); /* 5 itens + margem */
+  overflow-y: auto;
+}
+
+/* Firefox */
+.card ul {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) transparent;
+}
+
+/* Chrome, Edge, Safari */
+.card ul::-webkit-scrollbar {
+  width: 6px;
+}
+
+.card ul::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.card ul::-webkit-scrollbar-thumb {
+  background-color: var(--accent);
+  border-radius: 10px;
+}
+
+
 ul {
   list-style: none;
   padding: 0;
@@ -1098,8 +1125,8 @@ html.light .socials img {
 /* BADGE */
 .ia-badge {
   position: absolute;
-  top: 11px;
-  right: -13px;
+  top: 10px;
+  right: 35%;
   font-size: 0.55rem;
   font-weight: 800;
   padding: 2px 6px;
