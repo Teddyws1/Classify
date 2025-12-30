@@ -180,8 +180,15 @@ button {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 16px;
-  padding: 18px; /* era 18px → +2px */
+  padding: 18px;
 }
+.card li {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 8px;
+}
+
 
 
 .card h2 {
@@ -197,27 +204,13 @@ button {
   font-size: 0.8rem;
   color: var(--muted);
 }
-
-/* altura aproximada de um <li> = 26px (ajuste se quiser) */
-
-/* Firefox */
-.card ul {
-  scrollbar-width: thin;
-  scrollbar-color: var(--accent) transparent;
-}
-
-/* Chrome, Edge, Safari */
-.card ul::-webkit-scrollbar {
-  width: 6px;
-}
-
-.card ul::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.card ul::-webkit-scrollbar-thumb {
-  background-color: var(--accent);
-  border-radius: 10px;
+ 
+.card li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-right: 42px; /* reserva espaço pro badge */
 }
 
 
@@ -226,6 +219,8 @@ ul {
   padding: 0;
   margin: 0;
 }
+
+
 
 li {
   display: flex;
@@ -942,7 +937,7 @@ html.light .socials img {
   height: 28px;
   border-radius: 8px;
   cursor: pointer;
-  background: #f59e0b;
+  background: #d1890c;
   border: 1px solid var(--border);
   z-index: 2;
 }
@@ -955,7 +950,7 @@ html.light .socials img {
 
 /* HOVER */
 .share-btn:hover {
-  background: rgba(139, 130, 4, 0.274);
+  background: rgb(218, 203, 0);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
 }
 
@@ -1129,9 +1124,12 @@ html.light .socials img {
 }
 
 /* novos ias */
-/* BADGE */
 .ia-badge {
-position: absolute;
+  position: absolute;
+  top: 50%;
+  right: 12px; /* mesma distância para todos */
+  transform: translateY(-50%);
+
   font-size: clamp(0.5rem, 1vw, 0.55rem);
   font-weight: 800;
   padding: 2px 6px;
@@ -1139,7 +1137,12 @@ position: absolute;
   background: var(--accent-main);
   color: #111;
   white-space: nowrap;
+  pointer-events: none;
 }
+.ia-badge {
+  position: static;
+}
+
 
 
 /* ÍCONE */
@@ -1150,33 +1153,6 @@ position: absolute;
   color: #ffffff;
   animation: badgePulse 1.6s ease-in-out infinite;
 }
-/* MOBILE PEQUENO (até 480px) */
-@media (max-width: 480px) {
-  .ia-badge {
-    top: 6px;
-    right: 25%;
-
-    font-size: 0.5rem;
-    padding: 2px 5px;
-  }
-}
-/*TABLET / MOBILE GRANDE (até 768px)*/
-@media (max-width: 768px) {
-  .ia-badge {
-    top: 8px;
-    right:33%;
-    font-size: 0.52rem;
-  }
-}
-
-/* NOTEBOOK / TELAS MÉDIAS (até 1200px) */
-@media (max-width: 1200px) {
-  .ia-badge {
-    top: 6px;
-    right: 35%;
-  }
-}
-
 
 
 /* ÍCONE */
@@ -1185,4 +1161,81 @@ position: absolute;
   height: 18px;
   border-radius: 4px;
   background: #fff;
+}
+
+/* Destaque da busca */
+mark {
+    background-color: #ffcf33;
+    color: #000;
+    border-radius: 2px;
+    padding: 0 2px;
+}
+
+/* Container do item (li) ajustado para o botão de compartilhar */
+.ia-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative; /* Necessário para posicionar o menu */
+    padding: 10px;
+}
+
+/* Agrupamento de Imagem + Link */
+.tool-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Botão de Compartilhar */
+.share-btn {
+    background: #facc15;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--text-color); /* Use sua variável de cor */
+   
+    transition: opacity 0.3s;
+}
+
+.share-btn:hover {
+    opacity: 1;
+}
+
+/* Menu de Compartilhamento */
+.share-menu {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--bg-card); /* Cor de fundo do seu card */
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+    overflow: hidden;
+}
+
+.share-menu button {
+    padding: 8px 16px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    transition: background 0.2s;
+}
+
+.share-menu button:hover {
+    background: #1d5c64b7;
+}
+
+/* Impedir scroll quando modal/sidebar está aberto */
+.no-scroll {
+    overflow: hidden;
 }
