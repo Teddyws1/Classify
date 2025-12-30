@@ -47,9 +47,9 @@ body.no-scroll {
 /* ================== HEADER ================== */
 .main-header {
   max-width: calc(1300px - var(--sidebar-space));
-  margin: 0 auto 30px;
-  margin-left: 21%;
-  padding: 20px;
+  margin: 16px auto 30px; /* centraliza corretamente */
+  padding: 20px 24px;
+
   text-align: center;
   border-radius: 18px;
   background: var(--card);
@@ -318,6 +318,14 @@ footer .social a:hover::after {
   position: relative;
   padding: 6px 0;
   
+}
+
+li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-right: 52px; /* espaço reservado pro badge */
 }
 
 /* AGRUPA ÍCONE + TEXTO */
@@ -929,7 +937,8 @@ html.light .socials img {
   all: unset;
   position: absolute;        /* 🔥 tira do fluxo */
   right: 12px;               /* posição real */
-  top: 50%;
+  top: 22%;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1126,33 +1135,35 @@ html.light .socials img {
 /* novos ias */
 .ia-badge {
   position: absolute;
+  right: 54px;          /* posição fixa (igual ao azul) */
   top: 50%;
-  right: 12px; /* mesma distância para todos */
   transform: translateY(-50%);
 
-  font-size: clamp(0.5rem, 1vw, 0.55rem);
   font-weight: 800;
+  font-size: 0.65rem;
   padding: 2px 6px;
   border-radius: 999px;
   background: var(--accent-main);
   color: #111;
+
   white-space: nowrap;
   pointer-events: none;
 }
-.ia-badge {
-  position: static;
+
+
+li:not(:has(.ia-badge)) {
+  padding-right: 16px;
 }
-
-
 
 /* ÍCONE */
 .ia-badge ion-icon {
-  font-size: clamp(0.7rem, 1.2vw, 0.85rem);
-  margin-right: 2px;
+  font-size: 0.7rem;
+  margin-right: 4px;
   vertical-align: middle;
-  color: #ffffff;
+  color: #fff;
   animation: badgePulse 1.6s ease-in-out infinite;
 }
+
 
 
 /* ÍCONE */
