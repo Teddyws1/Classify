@@ -101,11 +101,10 @@
   <!--versão do sistema-->
   <div class="app-version">
   <span>Versão</span>
-  <strong>1.4.2</strong>
+  <strong>v 1.5.3</strong>
 </div>
 
 </aside>
-
 
     <header class="main-header">
       <div class="header-content">
@@ -114,13 +113,22 @@
           <p id="total"></p>
         </div>
 
-        <div class="controls">
-          <input
-            id="search"
-            placeholder="Buscar ferramenta..."
-            aria-label="Buscar ferramenta"
-          />
-        </div>
+   <div class="search-box">
+  <ion-icon name="search-outline" class="icon-search"></ion-icon>
+
+  <input
+    id="search"
+    type="text"
+    placeholder="Buscar ferramenta..."
+    aria-label="Buscar ferramenta"
+  />
+
+<button id="clearSearch" class="clear-btn" aria-label="Limpar busca">
+  <ion-icon name="close-outline"></ion-icon>
+</button>
+</div>
+
+
       </div>
     </header>
 
@@ -703,5 +711,6 @@ NOVO</span>
         </span>
       </div>
     </footer>
+  
   </body>
 </html>

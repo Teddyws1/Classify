@@ -163,6 +163,122 @@ button {
   font-weight: bold;
 }
 
+/* icone de lupa */
+.search-box {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+}
+
+/* ícone lupa */
+
+.search-box {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+}
+
+.search-box ion-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 25px;
+  color: #facc15;
+}
+
+
+.search-box input {
+  width: 100%;
+  padding: 12px 44px 12px 44px; /* espaço ícone + botão */
+  border-radius: 14px;
+  border: 1px solid #1f2937;
+
+  background: linear-gradient(180deg, #0f172a, #020617);
+  color: #ffffff;
+
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+
+  outline: none;
+
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease,
+    transform 0.15s ease;
+}
+/* ======================
+   TEMA CLARO – INPUT
+====================== */
+.light .search-box input {
+  background: #ffffff;              /* fundo branco */
+  color: #000000;                   /* texto escuro */
+  border: 1px solid #d1d5db;        /* cinza claro */
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.08);
+}
+
+
+/* placeholder */
+.search-box input::placeholder {
+  color: #94a3b8;
+}
+.search-box input:focus {
+  border-color: #facc15;
+  box-shadow: 0 0 0 1px #f59e0b;
+}
+
+
+/* foco com animação */
+.search-box input:focus {
+  border-color: #c49d0170;
+  box-shadow: 0 0 0 3px #facc15;
+  transform: scale(1.02);
+}
+
+/* animação do ícone no foco */
+.search-box input:focus + .clear-btn ~ .icon-search,
+.search-box input:focus ~ .icon-search {
+  color: #e5ff00;
+  transform: translateY(-50%) scale(1.15);
+}
+
+/* placeholder */
+.search-box input::placeholder {
+  color: #8b949e;
+}
+
+/* botão limpar */
+.clear-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: #8b949e;
+  font-size: 16px;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease, color 0.2s ease;
+}
+
+.clear-btn:hover {
+  color: #ff0000;
+  transform: translateY(-50%) scale(1.15);
+}
+
+/* botão aparece quando tem texto */
+.search-box.has-text .clear-btn {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+
+
 .grid {
   max-width: 1300px;
   margin: auto;

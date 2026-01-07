@@ -10,8 +10,18 @@ cards.forEach((c) => {
 });
 
 const searchInput = document.getElementById("search");
+const clearBtn = document.getElementById("clearSearch");
+const searchBox = document.querySelector(".search-box");
+
 searchInput.addEventListener("keyup", () => {
   const value = searchInput.value.toLowerCase();
+
+  // controla botão limpar
+  if (value.length > 0) {
+    searchBox.classList.add("has-text");
+  } else {
+    searchBox.classList.remove("has-text");
+  }
 
   cards.forEach((card) => {
     const lis = card.querySelectorAll("li");
@@ -47,6 +57,17 @@ searchInput.addEventListener("keyup", () => {
   });
 });
 
+/* botão limpar */
+clearBtn.addEventListener("click", () => {
+  searchInput.value = "";
+  searchInput.focus();
+  searchBox.classList.remove("has-text");
+
+  // dispara o filtro novamente vazio
+  searchInput.dispatchEvent(new KeyboardEvent("keyup"));
+});
+
+/* tema */
 function toggleTheme() {
   document.body.classList.toggle("light");
 }
