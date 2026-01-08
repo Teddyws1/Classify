@@ -214,13 +214,16 @@ document.addEventListener("keydown", e => {
   if (e.key === "Escape") unlockScroll();
 });
 
-
-  //sistema de card de aviso
+//card de aviso
 document.addEventListener("DOMContentLoaded", () => {
-  const overlay = document.getElementById("update-notice");
-  const closeBtn = document.getElementById("close-notice");
+  const warning = document.getElementById("cacheWarning");
+  const closeBtn = document.getElementById("closeWarning");
+  const sound = document.getElementById("alertSound");
 
-  if (!overlay || !closeBtn) return;
+  if (!warning || !closeBtn) {
+    console.error("Aviso não encontrado no HTML.");
+    return;
+  }
 
   function lockScroll() {
     document.body.classList.add("no-scroll");
@@ -230,24 +233,37 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.remove("no-scroll");
   }
 
-  // abre o aviso
-  overlay.style.display = "flex";
-  lockScroll();
+  function showWarning() {
+    warning.style.display = "flex";
+    lockScroll();
 
-  // botão "Entendi"
-  closeBtn.addEventListener("click", () => {
-    overlay.style.display = "none";
-    unlockScroll();
-  });
-
-  // clique fora do card
-  overlay.addEventListener("click", (e) => {
-    if (e.target === overlay) {
-      overlay.style.display = "none";
-      unlockScroll();
+    // toca som
+    if (sound) {
+      sound.currentTime = 0;
+      sound.play().catch(() => {
+        // alguns navegadores bloqueiam som automático
+        console.warn("Som bloqueado pelo navegador.");
+      });
     }
+  }
+
+  function hideWarning() {
+    warning.style.display = "none";
+    unlockScroll();
+  }
+
+  // MOSTRA AO ENTRAR NO SITE
+  showWarning();
+
+  // botão fechar
+  closeBtn.addEventListener("click", hideWarning);
+
+  // tecla ESC fecha
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape") hideWarning();
   });
-}); 
+});
+//fim do card de aviso
 
 // Adição de novos sites
 const DAYS_NEW = 30;
