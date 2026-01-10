@@ -293,6 +293,7 @@ button {
   border-radius: 16px;
   padding: 18px;
 }
+
 .card li {
   display: grid;
   grid-template-columns: auto 1fr auto;
@@ -323,8 +324,134 @@ button {
   gap: 8px;
   padding-right: 42px; /* reserva espaço pro badge */
 }
+/* sitema de ver mais/menos */
+
+/* esconde os itens extras */
+.card li.hidden {
+  display: none;
+}
+
+/* fundo escuro */
+.overlay-bg {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(3px);
+  z-index: 900;
+  opacity: 0;
+  pointer-events: none;
+  transition: .25s;
+}
+.overlay-bg.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* modal central */
+.card.overlay-open ul {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 420px;
+  max-height: 70vh;
+  overflow-y: auto;
+
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 30px;
+
+  z-index: 1000;
+  box-shadow: 0 30px 60px rgba(0,0,0,.45);
+}
+
+/* botão fechar */
+.btn-close {
+  position: fixed;
+  top: 1px;
+  right: 2px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: #ffffff0f;
+  backdrop-filter: blur(6px);
+  color: #ffffff;
+  font-size: 1.3rem;
+  font-weight: bold;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,.45);
+  transition: .25s ease;
+  z-index: 10001;
+}
 
 
+
+/* hover bonito */
+.btn-fechar-modal:hover {
+  background: #facc15;
+  color: #111;
+  transform: scale(1.08) rotate(90deg);
+}
+
+
+/* button de ver mais/menos */
+.ver-mais-btn {
+  margin-top: 12px;
+  padding: 10px 16px;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  background: linear-gradient(135deg, #facc15, #f59e0b);
+  color: #111;
+
+  border: none;
+  border-radius: 999px;
+
+  font-size: .9rem;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  box-shadow: 0 6px 14px rgba(0,0,0,.25);
+  transition: .25s ease;
+
+  user-select: none;
+}
+
+/* ícone */
+.ver-mais-btn ion-icon {
+  font-size: 1.2rem;
+  transition: transform .25s ease;
+}
+
+/* hover */
+.ver-mais-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(0,0,0,.35);
+}
+
+/* hover anima ícone */
+.ver-mais-btn:hover ion-icon {
+  transform: translateY(2px);
+}
+
+/* foco acessível */
+.ver-mais-btn:focus-visible {
+  outline: 2px solid #facc15;
+  outline-offset: 3px;
+}
+
+
+/* fim button de ver mais/menos */
 ul {
   list-style: none;
   padding: 0;
@@ -341,10 +468,29 @@ li {
 }
 
 li img {
-  width: 18px;
-  height: 18px;
-  border-radius: 4px;
+  width: 28px;
+  height: 28px;
+  object-fit: contain; /* garante que não distorce */
+  border-radius: 6px;
+  background: rgba(255,255,255,.08); /* leve fundo p/ destacar */
+  padding: 2px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.25);
+  transition: .25s ease;
 }
+
+/* efeito no hover do item */
+li:hover img {
+  transform: scale(1.15);
+  box-shadow: 0 4px 12px rgba(0,0,0,.35);
+}
+
+
+/* efeito no hover do item */
+li:hover img {
+  transform: scale(1.2); /* um pouco mais de destaque */
+  box-shadow: 0 4px 12px rgba(0,0,0,.35);
+}
+
 
 a {
   color: var(--link);
@@ -461,18 +607,102 @@ li {
 }
 
 /* MENU DE OPÇÕES */
-.share-menu {
-  position: absolute;
-  top: 30px;
-  right: 0;
-  background: var(--card);
-  border: 1px solid var(--border);
+/* ================= BASE ================= */
+
+.share-menu button {
+  background: transparent;
+  border: none;
+  color: #e5e5e5;
+  padding: 10px 12px;
   border-radius: 10px;
-  padding: 6px;
-  min-width: 160px;
-position: relative;
-  z-index: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: .9rem;
+  transition: .25s;
 }
+
+/* ================= ÍCONES ================= */
+.share-menu ion-icon {
+  font-size: 1.25rem;
+  min-width: 22px;
+  transition: .25s;
+}
+
+/* 📋 Copiar */
+.share-menu ion-icon[name="clipboard-outline"] {
+  color: #facc15;
+}
+
+/* 🟢 WhatsApp */
+.share-menu ion-icon[name="logo-whatsapp"] {
+  color: #25D366;
+}
+
+.icon-x {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+}
+
+.icon-x svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+
+  /* 🔧 correção visual */
+transform: translateY(1.5px);
+
+}
+
+
+/* 🔷 Facebook */
+.share-menu ion-icon[name="logo-facebook"] {
+  color: #1877F2;
+}
+
+/* ================= HOVER ================= */
+.share-menu button:hover {
+  background: rgba(255,255,255,.06);
+}
+
+.share-menu button:hover ion-icon {
+  transform: scale(1.15);
+  filter: brightness(1.15);
+}
+
+/* ================= MODO CLARO ================= */
+@media (prefers-color-scheme: light) {
+  .share-menu {
+    background: #fff;
+    border-color: #e5e5e5;
+    box-shadow: 0 10px 25px rgba(0,0,0,.15);
+  }
+
+  .share-menu button {
+    color: #222;
+  }
+
+  .share-menu button:hover {
+    background: #f3f3f3;
+  }
+}
+
+/* ================= ANIMAÇÃO ================= */
+@keyframes popIn {
+  from {
+    transform: scale(.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 
 .share-menu button {
   width: 100%;
@@ -492,7 +722,10 @@ position: relative;
   border-radius: 6px;
 }
 
+/* cor do icone do combartilhamento */
 
+
+/* fim cor do icone do combartilhamento */
 /* BOTÃO ABRIR */
 .open-sidebar {
   position: fixed;
@@ -1032,16 +1265,45 @@ html.light .socials img {
   }
 }
 
-/* icone do span 5sites */
+/* icone do span sites */
 .card h2 span {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
+
+  width: fit-content;      /* 🔥 só ocupa o tamanho do texto */
+  max-width: max-content;  /* evita esticar */
+
+  padding: 4px 10px;
+  border-radius: 999px;
+
+  font-size: .75rem;
+  font-weight: 600;
+
+  background: #121d33;
+  color: #4f8cff;
+
+  box-shadow: 0 2px 6px rgba(0,0,0,.12);
 }
 
-.card h2 span ion-icon {
-  font-size: 1rem;
+/* hover */
+.card h2 span:hover {
+  background: rgba(79,140,255,.2);
+  transform: translateY(-1px);
 }
+.card h2 span {
+  min-height: 28px;
+}
+.card h2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card h2 span {
+  flex: 0 0 auto;   /* ❌ não deixa esticar */
+}
+
 
 /* icon de compartilhar */
 .share-btn {
@@ -1568,9 +1830,26 @@ left: 25%;
 /* icone de atualização */
 
 .modal-box li ion-icon {
-  font-size: 1.3rem;
-  color: #facc15;
-  min-width: 22px;
+  font-size: 1.6rem;        /* ícone maior */
+  color: #facc15;          /* cor destaque */
+  min-width: 26px;         /* garante alinhamento */
+  
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-right: 8px;       /* espaço do texto */
+  vertical-align: middle;
+
+  transition: 
+    transform .2s ease,
+    color .2s ease;
+}
+
+/* efeito suave ao passar o mouse */
+.modal-box li:hover ion-icon {
+  transform: scale(1.15);
+  color: #ffffff;          /* amarelo mais claro no hover */
 }
 
 
@@ -1755,3 +2034,5 @@ left: 25%;
     font-size: 14px;
 }
 /*fim NOTIFICAÇÃO*/
+
+/* novo sis */

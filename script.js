@@ -8,7 +8,103 @@ cards.forEach((c) => {
 
   total += n;
 });
+//novo sis
+const MAX_VISIBLE = 4;
 
+/* fundo escuro */
+const overlayBg = document.createElement("div");
+overlayBg.className = "overlay-bg";
+document.body.appendChild(overlayBg);
+
+let cardAberto = null;
+
+/* =========================
+   CONTROLE DE SCROLL
+========================= */
+function bloquearScroll() {
+  document.body.style.overflow = "hidden";
+}
+
+function liberarScroll() {
+  document.body.style.overflow = "";
+}
+
+/* =========================
+   SISTEMA VER MAIS
+========================= */
+
+cards.forEach((card) => {
+  const list = card.querySelector("ul");
+  if (!list) return;
+
+  const items = [...list.querySelectorAll("li")];
+  if (items.length <= MAX_VISIBLE) return;
+
+  /* esconde a partir do 5º */
+  items.slice(MAX_VISIBLE).forEach((li) => li.classList.add("hidden"));
+
+  /* botão ver mais */
+  const btnVerMais = document.createElement("button");
+  btnVerMais.className = "ver-mais-btn";
+  btnVerMais.innerHTML = `Ver mais <ion-icon name="eye-outline" class="icon-ver-mais"></ion-icon>`;
+
+  /* botão fechar */
+  const btnFechar = document.createElement("button");
+  btnFechar.className = "btn-close";
+  btnFechar.innerHTML = "✕";
+
+  function abrirModal() {
+    items.forEach((li) => li.classList.remove("hidden"));
+
+    card.classList.add("overlay-open");
+    overlayBg.classList.add("active");
+
+    list.appendChild(btnFechar);
+    cardAberto = card;
+
+    bloquearScroll(); // 🔒 trava scroll
+  }
+
+  function fecharModal() {
+    card.classList.remove("overlay-open");
+    overlayBg.classList.remove("active");
+
+    items.slice(MAX_VISIBLE).forEach((li) => li.classList.add("hidden"));
+
+    btnFechar.remove();
+    cardAberto = null;
+
+    liberarScroll(); // 🔓 libera scroll
+  }
+
+  /* clique em ver mais */
+  btnVerMais.addEventListener("click", (e) => {
+    e.stopPropagation();
+    abrirModal();
+  });
+
+  /* clique no X */
+  btnFechar.addEventListener("click", (e) => {
+    e.stopPropagation();
+    fecharModal();
+  });
+
+  list.after(btnVerMais);
+});
+
+/* =========================
+   CLICAR FORA FECHA
+========================= */
+overlayBg.addEventListener("click", () => {
+  if (!cardAberto) return;
+
+  const btn = cardAberto.querySelector(".btn-close");
+  if (btn) btn.click();
+});
+
+/* =========================
+   SEARCH
+========================= */
 const searchInput = document.getElementById("search");
 const clearBtn = document.getElementById("clearSearch");
 const searchBox = document.querySelector(".search-box");
@@ -16,7 +112,6 @@ const searchBox = document.querySelector(".search-box");
 searchInput.addEventListener("keyup", () => {
   const value = searchInput.value.toLowerCase();
 
-  // controla botão limpar
   if (value.length > 0) {
     searchBox.classList.add("has-text");
   } else {
@@ -29,10 +124,11 @@ searchInput.addEventListener("keyup", () => {
 
     lis.forEach((li) => {
       const link = li.querySelector("a");
+      if (!link) return;
+
       const name = link.innerText;
       const lower = name.toLowerCase();
 
-      // remove destaque anterior
       link.innerHTML = name;
 
       if (lower.includes(value) && value !== "") {
@@ -57,6 +153,7 @@ searchInput.addEventListener("keyup", () => {
   });
 });
 
+//card de div ver mais/meno
 /* botão limpar */
 clearBtn.addEventListener("click", () => {
   searchInput.value = "";
@@ -72,7 +169,6 @@ function toggleTheme() {
   document.body.classList.toggle("light");
 }
 
-
 // Prepara todos os <li>
 document.querySelectorAll(".card ul li").forEach((li) => {
   const img = li.querySelector("img");
@@ -87,15 +183,12 @@ document.querySelectorAll(".card ul li").forEach((li) => {
   li.prepend(left);
 
   // Botão compartilhar
-const btn = document.createElement("button");
-btn.className = "share-btn minimal auto-theme";
-btn.innerHTML = '<ion-icon name="copy-outline"></ion-icon>';
-btn.title = "Copiar link";
+  const btn = document.createElement("button");
+  btn.className = "share-btn minimal auto-theme";
+  btn.innerHTML = '<ion-icon name="copy-outline"></ion-icon>';
+  btn.title = "Copiar link";
 
-li.appendChild(btn);
-
-
-
+  li.appendChild(btn);
 
   btn.addEventListener("click", (e) => {
     e.stopPropagation();
@@ -109,7 +202,18 @@ li.appendChild(btn);
     menu.innerHTML = `
       <button onclick="copyLink('${url}')"><ion-icon name="clipboard-outline"></ion-icon>Copiar link</button>
       <button onclick="shareWhats('${url}')"><ion-icon name="logo-whatsapp"></ion-icon> WhatsApp</button>
-      <button onclick="shareTwitter('${url}')"><ion-icon name="logo-twitter"></ion-icon> Twitter / X</button>
+      <button onclick="shareTwitter('${url}')">
+  <span class="icon-x">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        d="M18.244 2H21l-6.53 7.458L22 22h-6.828l-5.345-7.004L3.88 22H1l7.07-8.077L2 2h6.828l4.835 6.41L18.244 2Zm-2.39 18h1.884L8.25 4H6.23l9.624 16Z"
+        fill="currentColor"
+      />
+    </svg>
+  </span>
+  X
+</button>
+
       <button onclick="shareFacebook('${url}')"><ion-icon name="logo-facebook"></ion-icon>  Facebook</button>
     `;
 
@@ -139,7 +243,6 @@ window.addEventListener("scroll", () => {
 
   lastScroll = currentScroll;
 });
-
 
 document.addEventListener("click", removeMenus);
 
@@ -213,7 +316,7 @@ closeSidebarBtn.addEventListener("click", () => {
 });
 
 overlay.addEventListener("click", unlockScroll);
-document.addEventListener("keydown", e => {
+document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") unlockScroll();
 });
 
@@ -262,7 +365,7 @@ document.addEventListener("DOMContentLoaded", () => {
   closeBtn.addEventListener("click", hideWarning);
 
   // tecla ESC fecha
-  document.addEventListener("keydown", e => {
+  document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") hideWarning();
   });
 });
@@ -292,7 +395,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const today = new Date();
 
-  document.querySelectorAll("li[data-new]").forEach(li => {
+  document.querySelectorAll("li[data-new]").forEach((li) => {
     const addedDate = new Date(li.dataset.new);
     const diffTime = today - addedDate;
     const diffDays = diffTime / (1000 * 60 * 60 * 24);
@@ -307,7 +410,6 @@ document.addEventListener("DOMContentLoaded", () => {
       li.appendChild(badge);
     }
   });
-  
 });
 //fim sistema de novas ia com (li)
 
@@ -336,7 +438,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 //fim card coisas novas
 
-//modal das infomação 
+//modal das infomação
 document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("modalNews");
   const modalBox = modal.querySelector(".modal-box");
@@ -359,47 +461,97 @@ document.addEventListener("DOMContentLoaded", () => {
       modal.classList.remove("active");
     }
   });
-  
 });
 
-
-//fim modal das infomação 
+//fim modal das infomação
 
 //NOTIFICAÇÃO
 // Função para fechar o toast manualmente ao clicar no X
 function fecharToastManual() {
-    const toast = document.getElementById('toast');
-    toast.classList.remove('active');
+  const toast = document.getElementById("toast");
+  toast.classList.remove("active");
 }
 
-// O restante do seu código JS continua igual, 
+// O restante do seu código JS continua igual,
 // mas agora você tem essa função extra para o botão.
 
-const toast = document.getElementById('toast');
-const bar = document.getElementById('bar');
-const modal = document.getElementById('modal');
+const toast = document.getElementById("toast");
+const bar = document.getElementById("bar");
+const modal = document.getElementById("modal");
 
-window.onload = () => {
-    setTimeout(() => {
-        toast.classList.add('active');
-        bar.style.animationPlayState = 'running';
-    }, 1200);
-};
+const TOAST_KEY = "toast_expire_date";
+const SHOW_DAYS = 30; // 👈 quantos dias o toast vai aparecer
 
-bar.addEventListener('animationend', () => {
-    toast.classList.remove('active');
-});
+let toastTimer;
 
+/* ================= MOSTRAR TOAST ================= */
+function showToast(time = 5000) {
+  toast.classList.add("active");
+
+  bar.style.animation = "none";
+  bar.offsetHeight; // força reflow
+  bar.style.animation = `progress ${time}ms linear forwards`;
+  bar.style.animationPlayState = "running";
+
+  toastTimer = setTimeout(() => {
+    hideToast();
+  }, time);
+}
+
+/* ================= ESCONDER ================= */
+function hideToast() {
+  toast.classList.remove("active");
+}
+
+/* ================= CONTROLE POR DIAS ================= */
+function canShowToast() {
+  const saved = localStorage.getItem(TOAST_KEY);
+
+  if (!saved) {
+    const expire = new Date();
+    expire.setDate(expire.getDate() + SHOW_DAYS);
+    localStorage.setItem(TOAST_KEY, expire.toISOString());
+    return true;
+  }
+
+  const expireDate = new Date(saved);
+  const now = new Date();
+
+  return now <= expireDate; // só mostra se ainda estiver no prazo
+}
+
+/* ================= MODAL ================= */
 function abrirModal() {
-    fecharToastManual(); // Usa a função manual para sumir com o toast
-    modal.style.display = 'flex';
+  hideToast();
+  modal.style.display = "flex";
 }
 
 function fecharModal() {
-    modal.style.display = 'none';
+  modal.style.display = "none";
 }
 
-toast.onmouseenter = () => bar.style.animationPlayState = 'paused';
-toast.onmouseleave = () => bar.style.animationPlayState = 'running';
+/* ================= PAUSAR NO HOVER ================= */
+toast.addEventListener("mouseenter", () => {
+  bar.style.animationPlayState = "paused";
+  clearTimeout(toastTimer);
+});
+
+toast.addEventListener("mouseleave", () => {
+  bar.style.animationPlayState = "running";
+  toastTimer = setTimeout(() => {
+    hideToast();
+  }, 1500);
+});
+
+/* ================= INICIAR ================= */
+window.onload = () => {
+  if (!canShowToast()) return; // ⛔ fora do prazo
+
+  setTimeout(() => {
+    showToast(6000); // tempo visível
+  }, 1200);
+};
 
 //fim NOTIFICAÇÃO
+
+//novo sis
