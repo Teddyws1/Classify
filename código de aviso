@@ -1,0 +1,38 @@
+
+// 1. Mostrar notificação ao carregar a página
+window.addEventListener('load', () => {
+  const toast = document.getElementById('toast-notify');
+  
+  setTimeout(() => {
+    toast.classList.add('active');
+    
+    // Sumir automaticamente após 5 segundos
+    setTimeout(() => {
+      toast.classList.remove('active');
+    }, 5000);
+  }, 800);
+});
+
+// 2. Funções do Modal
+const modal = document.getElementById('modal-container');
+
+function abrirModal() {
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden'; // Trava o scroll do fundo
+}
+
+function fecharModal() {
+  modal.style.display = 'none';
+  document.body.style.overflow = 'auto'; // Libera o scroll
+}
+
+// Fechar se clicar fora do modal (no escuro)
+window.onclick = (e) => {
+  if (e.target === modal) fecharModal();
+};
+
+//fim NOTIFICAÇÃO///
+
+
+
+

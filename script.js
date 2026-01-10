@@ -87,12 +87,15 @@ document.querySelectorAll(".card ul li").forEach((li) => {
   li.prepend(left);
 
   // Botão compartilhar
-  const btn = document.createElement("button");
-  btn.className = "share-btn";
-  btn.innerHTML = "<ion-icon name=\"link-outline\"></ion-icon>";
-  btn.title = "Compartilhar";
+const btn = document.createElement("button");
+btn.className = "share-btn minimal auto-theme";
+btn.innerHTML = '<ion-icon name="copy-outline"></ion-icon>';
+btn.title = "Copiar link";
 
-  li.appendChild(btn);
+li.appendChild(btn);
+
+
+
 
   btn.addEventListener("click", (e) => {
     e.stopPropagation();
@@ -283,4 +286,120 @@ document.querySelectorAll(".ia-list li").forEach((li) => {
   }
 });
 
+//sistema de novas ia com (li)
+document.addEventListener("DOMContentLoaded", () => {
+  const DAYS_AS_NEW = 30; // quantos dias o item fica como NOVO
 
+  const today = new Date();
+
+  document.querySelectorAll("li[data-new]").forEach(li => {
+    const addedDate = new Date(li.dataset.new);
+    const diffTime = today - addedDate;
+    const diffDays = diffTime / (1000 * 60 * 60 * 24);
+
+    if (diffDays <= DAYS_AS_NEW) {
+      const badge = document.createElement("span");
+      badge.className = "ia-badge";
+      badge.innerHTML = `
+        <ion-icon name="sparkles-outline"></ion-icon>
+        NOVO
+      `;
+      li.appendChild(badge);
+    }
+  });
+  
+});
+//fim sistema de novas ia com (li)
+
+//card coisas novas
+document.addEventListener("DOMContentLoaded", () => {
+  const CARD_KEY = "new_feature_seen_v1";
+
+  const card = document.getElementById("newFeatureCard");
+  const closeBtn = document.getElementById("closeFeatureCard");
+
+  // se não existir o card, não faz nada (evita erro)
+  if (!card || !closeBtn) return;
+
+  // mostra só se ainda não foi visto
+  if (!localStorage.getItem(CARD_KEY)) {
+    setTimeout(() => {
+      card.classList.remove("hidden");
+    }, 800);
+  }
+
+  // ao fechar
+  closeBtn.addEventListener("click", () => {
+    card.classList.add("hidden");
+    localStorage.setItem(CARD_KEY, "true");
+  });
+});
+//fim card coisas novas
+
+//modal das infomação 
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("modalNews");
+  const modalBox = modal.querySelector(".modal-box");
+  const closeBtn = modal.querySelector(".close-modal");
+  const openBtn = document.querySelector(".btn-news");
+
+  // 👉 ABRIR PELO BOTÃO "NOVIDADES"
+  openBtn.addEventListener("click", () => {
+    modal.classList.add("active");
+  });
+
+  // 👉 FECHAR NO X
+  closeBtn.addEventListener("click", () => {
+    modal.classList.remove("active");
+  });
+
+  // 👉 FECHAR CLICANDO FORA DO MODAL
+  modal.addEventListener("click", (e) => {
+    if (!modalBox.contains(e.target)) {
+      modal.classList.remove("active");
+    }
+  });
+  
+});
+
+
+//fim modal das infomação 
+
+//NOTIFICAÇÃO
+// Função para fechar o toast manualmente ao clicar no X
+function fecharToastManual() {
+    const toast = document.getElementById('toast');
+    toast.classList.remove('active');
+}
+
+// O restante do seu código JS continua igual, 
+// mas agora você tem essa função extra para o botão.
+
+const toast = document.getElementById('toast');
+const bar = document.getElementById('bar');
+const modal = document.getElementById('modal');
+
+window.onload = () => {
+    setTimeout(() => {
+        toast.classList.add('active');
+        bar.style.animationPlayState = 'running';
+    }, 1200);
+};
+
+bar.addEventListener('animationend', () => {
+    toast.classList.remove('active');
+});
+
+function abrirModal() {
+    fecharToastManual(); // Usa a função manual para sumir com o toast
+    modal.style.display = 'flex';
+}
+
+function fecharModal() {
+    modal.style.display = 'none';
+}
+
+toast.onmouseenter = () => bar.style.animationPlayState = 'paused';
+toast.onmouseleave = () => bar.style.animationPlayState = 'running';
+
+//fim NOTIFICAÇÃO

@@ -7,6 +7,7 @@
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css" />
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>  
 <link rel="manifest" href="/Classify/manifest.json">
 <meta name="theme-color" content="#000000">
@@ -94,6 +95,11 @@
 <div class="divider-text">
   <span>CONFIGURAÇÕES</span>
 </div>
+<!-- BOTÃO -->
+<button class="btn-news">
+  <ion-icon name="sparkles-outline"></ion-icon> 
+  Novidades
+</button>
   <button id="toggleTheme" class="theme-btn">
     <ion-icon name="contrast-outline"></ion-icon> Alternar tema
   </button>
@@ -101,7 +107,7 @@
   <!--versão do sistema-->
   <div class="app-version">
   <span>Versão</span>
-  <strong>v 1.5.4</strong>
+  <strong>v 2.6.5</strong>
 </div>
 
 </aside>
@@ -162,14 +168,13 @@
               src="https://www.google.com/s2/favicons?domain=claude.ai&sz=32"
             /><a href="https://claude.ai" target="_blank">Claude</a>
           </li>
-          <li>
+          <li data-new="2026-01-10">
   <img
     src="https://www.google.com/s2/favicons?domain=deepseek.com&sz=32"
     alt="DeepSeek"
   />
   <a href="https://www.deepseek.com" target="_blank">DeepSeek</a>
-      <span class="ia-badge"><ion-icon name="sparkles-outline"></ion-icon>
-NOVO</span>
+  </span>
 </li>
         </ul>
       </div>
@@ -204,15 +209,12 @@ NOVO</span>
               src="https://www.google.com/s2/favicons?domain=liner.ai&sz=32"
             /><a href="https://liner.ai" target="_blank">Liner</a>
           </li>
-          <li>
+            <li data-new="2026-01-10">
   <img
     src="https://www.google.com/s2/favicons?domain=ciciai.com&sz=32"
     alt="Cici AI"
   />
   <a href="https://www.ciciai.com" target="_blank">Cici AI</a>
-   <span class="ia-badge"><ion-icon name="sparkles-outline"></ion-icon>
-NOVO</span>
-   
 </li>
 
         </ul>
@@ -679,6 +681,72 @@ NOVO</span>
           </li>
         </ul>
       </div>
+      <!-- MAPAS MENTAIS -->
+<div class="card" data-category>
+  <h2><ion-icon name="git-network-outline"></ion-icon> Mapas Mentais <span></span></h2>
+  <ul>
+    <li data-new="2026-01-10">
+      <img src="https://www.google.com/s2/favicons?domain=whimsical.com&sz=32" />
+      <a href="https://whimsical.com" target="_blank">Whimsical</a>
+      
+    </li>
+
+    <li data-new="2026-01-10">
+      <img src="https://www.google.com/s2/favicons?domain=gitmind.com&sz=32" />
+      <a href="https://gitmind.com" target="_blank">GitMind</a>
+      
+    </li>
+
+    <li data-new="2026-01-10">
+      <img src="https://www.google.com/s2/favicons?domain=miro.com&sz=32" />
+      <a href="https://miro.com" target="_blank">Miro</a>
+    
+    </li>
+
+    <li data-new="2026-01-10">
+      <img src="https://www.google.com/s2/favicons?domain=mindmeister.com&sz=32" />
+      <a href="https://mindmeister.com" target="_blank">MindMeister</a>
+
+    </li>
+
+    <li data-new="2026-01-10">
+      <img src="https://www.google.com/s2/favicons?domain=xmind.com&sz=32" />
+      <a href="https://www.xmind.com" target="_blank">XMind</a>
+     
+    </li>
+
+    <li data-new="2026-01-10">
+      <img src="https://www.google.com/s2/favicons?domain=edrawmind.com&sz=32" />
+      <a href="https://www.edrawmind.com" target="_blank">EdrawMind</a>
+      
+    </li>
+
+    <li data-new="2026-01-10">
+      <img src="https://www.google.com/s2/favicons?domain=mapamental.app&sz=32" />
+      <a href="https://mapamental.app" target="_blank">MapaMental.app</a>
+     
+    </li>
+
+    <li data-new="2026-01-10">
+      <img src="https://www.google.com/s2/favicons?domain=mapify.ai&sz=32" />
+      <a href="https://mapify.ai" target="_blank">Mapify</a>
+    
+    </li>
+
+    <li data-new="2026-01-10">
+      <img src="https://www.google.com/s2/favicons?domain=mymap.ai&sz=32" />
+      <a href="https://mymap.ai" target="_blank">MyMap.AI</a>
+    
+    </li>
+
+   <li data-new="2026-01-10">
+      <img src="https://www.google.com/s2/favicons?domain=monica.im&sz=32" />
+      <a href="https://monica.im" target="_blank">Monica.im</a>
+   
+    </li>
+  </ul>
+</div>
+
     </section>
 <!-- AVISO IMPORTANTE -->
 <div id="cacheWarning" class="cache-warning">
@@ -713,11 +781,49 @@ NOVO</span>
   </div>
 </div>
 
+<!--card coisas novas -->
+<div class="modal-news" id="modalNews">
+  <div class="modal-box">
+    <button class="close-modal" onclick="fecharModal()">✕</button>
+
+    <h2>✨ Novidades</h2>
+    <p class="subtitle">Veja o que preparamos para você</p>
+
+    <div class="scroll-area">
+      <ul id="newsList">
+        <li><ion-icon name="sparkles-outline"></ion-icon> Nova categoria: Mapas Mentais</li>
+<li><ion-icon name="notifications-outline"></ion-icon> Sistema de aviso de novidades</li>
+<li><ion-icon name="color-palette-outline"></ion-icon> Visual melhorado do modal</li>
+<li><ion-icon name="rocket-outline"></ion-icon> Performance otimizada</li>
+<li><ion-icon name="shield-checkmark-outline"></ion-icon> Segurança de dados Kernel</li>
+<li><ion-icon name="phone-portrait-outline"></ion-icon> Nova categoria</li>
+<li><ion-icon name="share-social-outline"></ion-icon> Novo ícone de compartilhamento</li>
+<li><ion-icon name="hardware-chip-outline"></ion-icon> Novas 12 IA</li>
+<li><ion-icon name="eye-outline"></ion-icon> Novo sistema que mostra novidades</li>
+
+      </ul>
+    </div>
+  </div>
+</div>
 
 <!--fim do sistema de card-->
+<div id="toast" class="toast-card">
+    <div class="toast-content">
+        <div class="icon-box">
+            <ion-icon name="gift-outline"></ion-icon>
+        </div>
+        <div class="text-box">
+            <strong>Ei, psiu! ✨</strong>
+            <p>Dá uma olhadinha no que veio nessa atualização!</p>
+        </div>
+        <button class="close-toast" onclick="fecharToastManual()">&times;</button>
+    </div>
+    <div id="bar" class="progress-bar"></div>
+</div>
+<!-- fim NOTIFICAÇÃO -->
 
     <footer>
-      <p><ion-icon name="pricetags-outline"></ion-icon> 16 categorias • <ion-icon name="hammer-outline"></ion-icon> 80 ferramentas • <ion-icon name="link-outline"></ion-icon> Links oficiais</p>
+      <p><ion-icon name="pricetags-outline"></ion-icon> 17 categorias • <ion-icon name="hammer-outline"></ion-icon> 92 ferramentas • <ion-icon name="link-outline"></ion-icon> Links oficiais</p>
 
       <div class="social">
         <span>

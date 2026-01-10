@@ -1,4 +1,4 @@
 # Classify
 IA pronto para uso
-1.5.4 v
-vers do cógd:0.0.18v
+2.6.5 v
+vers do cógd:2.1.19v
