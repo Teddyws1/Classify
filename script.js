@@ -8,7 +8,7 @@ cards.forEach((c) => {
 
   total += n;
 });
-//novo sis
+//sistam de cards da divs
 const MAX_VISIBLE = 4;
 
 /* fundo escuro */
@@ -554,4 +554,71 @@ window.onload = () => {
 
 //fim NOTIFICAÇÃO
 
-//novo sis
+///card altas
+// #1. Lógica de Troca de Abas
+const buttons = document.querySelectorAll(".tab-btn");
+const contents = document.querySelectorAll(".tab-content");
+
+buttons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    // Remove active de tudo
+    buttons.forEach((b) => b.classList.remove("active"));
+    contents.forEach((c) => c.classList.remove("active"));
+
+    // Adiciona no clicado
+    btn.classList.add("active");
+    const tabId = btn.getAttribute("data-tab");
+    document.getElementById(tabId).classList.add("active");
+  });
+});
+
+// #2. Lógica para Adicionar Números de Ranking (#1, #2...)
+// Isso percorre todas as listas e coloca o número antes do nome da IA
+const listas = document.querySelectorAll(".lista-ia");
+
+listas.forEach((lista) => {
+  const itens = lista.querySelectorAll("li");
+  itens.forEach((item, index) => {
+    const link = item.querySelector("a");
+    if (link) {
+      // Adiciona o número com base na posição (index + 1)
+      link.innerHTML = `<b>#${index + 1}</b> ${link.innerText}`;
+    }
+  });
+});
+
+// #3. Lógica para Arrastar com o Mouse (Desktop Drag)
+const sliders = document.querySelectorAll(".scroll-wrapper");
+
+sliders.forEach((slider) => {
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  slider.addEventListener("mousedown", (e) => {
+    isDown = true;
+    slider.style.cursor = "grabbing"; // Feedback visual de agarrar
+    startX = e.pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+  });
+
+  slider.addEventListener("mouseleave", () => {
+    isDown = false;
+    slider.style.cursor = "grab";
+  });
+
+  slider.addEventListener("mouseup", () => {
+    isDown = false;
+    slider.style.cursor = "grab";
+  });
+
+  slider.addEventListener("mousemove", (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - slider.offsetLeft;
+    const walk = (x - startX) * 2; // Velocidade do scroll
+    slider.scrollLeft = scrollLeft - walk;
+  });
+});
+
+///fim card altas
