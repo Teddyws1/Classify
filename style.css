@@ -521,13 +521,61 @@ li:hover img {
 }
 
 
+:root {
+  --link: #facc15;
+  /* Seu Amarelo Ouro */
+  --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 a {
   color: var(--link);
   text-decoration: none;
+  position: relative;
+  font-weight: 700;
+  display: inline-block;
+  transition: var(--transition);
+  padding-bottom: 2px;
+  /* Espaço para a linha não encostar na letra */
 }
 
+/* Criamos a linha personalizada (em vez do underline padrão) */
+a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  /* Começa no meio */
+  width: 0;
+  /* Começa sem largura */
+  height: 2px;
+  /* Espessura da linha */
+  background-color: var(--link);
+  transition: var(--transition);
+  transform: translateX(-50%);
+  /* Garante que ela cresça para os dois lados */
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(250, 204, 21, 0.3);
+  /* Brilho suave */
+}
+
+/* --- ESTADO HOVER --- */
+
 a:hover {
-  text-decoration: underline;
+  color: #fff;
+  /* Texto brilha levemente em branco */
+  text-shadow: 0 0 10px rgba(250, 204, 21, 0.5);
+}
+
+a:hover::after {
+  width: 100%;
+  /* A linha expande até cobrir o texto todo */
+  background-color: #fff;
+  /* A linha também pode brilhar em branco */
+}
+
+/* Feedback de clique suave */
+a:active {
+  opacity: 0.7;
 }
 
 footer {
@@ -596,23 +644,111 @@ footer .social a:hover::after {
 }
 
 /* ITEM COM BOTÃO */
+:root {
+  --bg-main: #0f172a;
+  /* O fundo que você escolheu */
+  --bg-item: #1e293b;
+  /* Um azul levemente mais claro para o card */
+  --accent-sun: #facc15;
+  /* Amarelo */
+  --accent-amber: #f59e0b;
+  /* Âmbar */
+  --text-bright: #f8fafc;
+  --text-dim: #94a3b8;
+}
+
+/* Aplicando ao container pai para contexto */
+body {
+  background-color: var(--bg-main);
+}
+
+.card ul {
+  list-style: none;
+  padding: 0;
+  perspective: 1000px;
+}
+/* 1. Reset de segurança para evitar que bordas "atampem" o conteúdo */
+.card ul li, .card ul li * {
+  box-sizing: border-box;
+}
+
 .card ul li {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  gap: 12px;
   position: relative;
-  padding: 6px 0;
 
+  margin-bottom: 12px;
+  padding: 16px 20px;
+  background: var(--bg-item);
+  border-radius: 12px;
+  color: var(--text-bright);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  
+  /* Importante: transition sem 'all' para não bugar o z-index */
+  transition: transform 0.4s var(--modal-ease), 
+              background 0.4s ease, 
+              border-color 0.4s ease, 
+              box-shadow 0.4s ease;
+
+  animation: slideInDark 0.6s ease-out backwards;
+  
+  /* Garante que o conteúdo (texto) fique acima do ::before */
+  z-index: 1; 
 }
 
-li {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding-right: 52px;
-  /* espaço reservado pro badge */
+/* 2. Melhoria no Hover: Sem "atampar" vizinhos */
+.card ul li:hover {
+  background: #334155;
+  border-color: var(--accent-sun);
+  
+  /* Z-index maior no hover para o brilho ficar por cima dos outros LIs */
+  z-index: 10; 
+  transform: scale(1.02) translateX(5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), 
+              0 0 20px rgba(245, 158, 11, 0.15);
+}
+
+/* 3. Badge Dinâmico: Ajuste de alinhamento */
+.card ul li .badge {
+  flex-shrink: 0; /* Impede que o badge seja "esmagado" pelo texto longo */
+  background: linear-gradient(135deg, var(--accent-sun), var(--accent-amber));
+  color: #000;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  transition: transform 0.3s ease;
+  pointer-events: none; /* Mouse ignora o badge e foca no LI */
+}
+
+/* 4. Linha Lateral (Before) - Ajuste de profundidade */
+.card ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 0;
+  background: var(--accent-sun);
+  transition: height 0.3s ease;
+  border-radius: 0 4px 4px 0;
+  z-index: -1; /* Fica atrás do conteúdo para não cobrir o texto */
+}
+
+.card ul li:hover::before {
+  height: 60%;
+}
+
+/* 5. Ajuste de Estouro (Scroll) no Modal Central */
+.card.overlay-open ul {
+  /* ... (seus estilos anteriores) ... */
+  overflow-y: overlay; /* Scrollbar não empurra o conteúdo (se suportado) */
+  scrollbar-gutter: stable; /* Evita que o modal "trema" ao surgir scroll */
 }
 
 /* AGRUPA ÍCONE + TEXTO */
@@ -639,18 +775,35 @@ li {
 /* MENU DE OPÇÕES */
 /* ================= BASE ================= */
 
+/* O card vira a referência */
+.card {
+  position: relative;
+}
+
+/* Container do botão (opcional, mas recomendado) */
+.share-menu {
+  position: absolute;
+  top: 12px;        /* distância do topo do card */
+  right: 12px;      /* distância da direita */
+  z-index: 10;      /* garante que fique na frente */
+}
+
 .share-menu button {
-  background: transparent;
+  width: 100%;
+  background: none;
   border: none;
-  color: #e5e5e5;
-  padding: 10px 12px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  color: var(--text);
+  padding: 6px 10px;
   cursor: pointer;
-  font-size: .9rem;
-  transition: .25s;
+  text-align: left;
+  font-size: 14px;
+  position: relative;
+  z-index: 0;
+}
+/* Hover */
+.share-menu button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: scale(1.05);
 }
 
 /* ================= ÍCONES ================= */
@@ -712,9 +865,7 @@ li {
     box-shadow: 0 10px 25px rgba(0, 0, 0, .15);
   }
 
-  .share-menu button {
-    color: #222;
-  }
+
 
   .share-menu button:hover {
     background: #f3f3f3;
@@ -733,27 +884,6 @@ li {
     opacity: 1;
   }
 }
-
-
-.share-menu button {
-  width: 100%;
-  background: none;
-  border: none;
-  color: var(--text);
-  padding: 6px 10px;
-  cursor: pointer;
-  text-align: left;
-  font-size: 14px;
-  position: relative;
-  z-index: 0;
-}
-
-.share-menu button:hover {
-  background: var(--border);
-  border-radius: 6px;
-}
-
-/* cor do icone do combartilhamento */
 
 
 /* fim cor do icone do combartilhamento */
@@ -2316,4 +2446,34 @@ mark {
     transform: translateX(0);
     opacity: .5;
   }
+}
+
+.card {
+  position: relative;
+}
+
+.ia-nova-indicador {
+  position: absolute;
+  top: -10px;
+  right: 14px;
+
+  padding: 0 12px;
+  height: 22px;
+
+  border-radius: 999px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 0.65rem;
+  font-weight: 800;
+  white-space: nowrap;
+
+  background: linear-gradient(135deg, #fde047, #f59e0b);
+  color: #f37373;
+
+  box-shadow:
+    0 6px 14px rgba(245, 158, 11, 0.45),
+    0 0 0 3px rgba(245, 158, 11, 0.18);
 }

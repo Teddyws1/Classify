@@ -480,7 +480,7 @@ const bar = document.getElementById("bar");
 const modal = document.getElementById("modal");
 
 const TOAST_KEY = "toast_expire_date";
-const SHOW_DAYS =5; // 👈 quantos dias o toast vai aparecer
+const SHOW_DAYS = 30; // 👈 quantos dias o toast vai aparecer
 
 let toastTimer;
 
