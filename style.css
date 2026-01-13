@@ -23,6 +23,8 @@
 * {
   box-sizing: border-box;
   font-family: Inter, system-ui, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 html, body {
@@ -82,7 +84,12 @@ body.no-scroll {
   font-size: .9rem;
   color: var(--muted);
 }
-
+button {
+    cursor: pointer;
+    background: #1d5c6400;
+    color: #000;
+    font-weight: bold;
+}
 /* ================== CONTROLS ================== */
 .controls {
   display: flex;
@@ -667,6 +674,7 @@ body {
   padding: 0;
   perspective: 1000px;
 }
+
 /* 1. Reset de segurança para evitar que bordas "atampem" o conteúdo */
 .card ul li, .card ul li * {
   box-sizing: border-box;
@@ -686,34 +694,33 @@ body {
   color: var(--text-bright);
   border: 1px solid rgba(255, 255, 255, 0.05);
   cursor: pointer;
-  
+
   /* Importante: transition sem 'all' para não bugar o z-index */
-  transition: transform 0.4s var(--modal-ease), 
-              background 0.4s ease, 
-              border-color 0.4s ease, 
-              box-shadow 0.4s ease;
+  transition: transform 0.4s var(--modal-ease),
+    background 0.4s ease,
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
 
   animation: slideInDark 0.6s ease-out backwards;
-  
-  /* Garante que o conteúdo (texto) fique acima do ::before */
-  z-index: 1; 
+
 }
 
 /* 2. Melhoria no Hover: Sem "atampar" vizinhos */
 .card ul li:hover {
   background: #334155;
   border-color: var(--accent-sun);
-  
+
   /* Z-index maior no hover para o brilho ficar por cima dos outros LIs */
-  z-index: 10; 
+  z-index: 10;
   transform: scale(1.02) translateX(5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), 
-              0 0 20px rgba(245, 158, 11, 0.15);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(245, 158, 11, 0.15);
 }
 
 /* 3. Badge Dinâmico: Ajuste de alinhamento */
 .card ul li .badge {
-  flex-shrink: 0; /* Impede que o badge seja "esmagado" pelo texto longo */
+  flex-shrink: 0;
+  /* Impede que o badge seja "esmagado" pelo texto longo */
   background: linear-gradient(135deg, var(--accent-sun), var(--accent-amber));
   color: #000;
   font-weight: 800;
@@ -722,7 +729,8 @@ body {
   text-transform: uppercase;
   font-size: 0.7rem;
   transition: transform 0.3s ease;
-  pointer-events: none; /* Mouse ignora o badge e foca no LI */
+  pointer-events: none;
+  /* Mouse ignora o badge e foca no LI */
 }
 
 /* 4. Linha Lateral (Before) - Ajuste de profundidade */
@@ -737,7 +745,8 @@ body {
   background: var(--accent-sun);
   transition: height 0.3s ease;
   border-radius: 0 4px 4px 0;
-  z-index: -1; /* Fica atrás do conteúdo para não cobrir o texto */
+  z-index: -1;
+  /* Fica atrás do conteúdo para não cobrir o texto */
 }
 
 .card ul li:hover::before {
@@ -747,8 +756,10 @@ body {
 /* 5. Ajuste de Estouro (Scroll) no Modal Central */
 .card.overlay-open ul {
   /* ... (seus estilos anteriores) ... */
-  overflow-y: overlay; /* Scrollbar não empurra o conteúdo (se suportado) */
-  scrollbar-gutter: stable; /* Evita que o modal "trema" ao surgir scroll */
+  overflow-y: overlay;
+  /* Scrollbar não empurra o conteúdo (se suportado) */
+  scrollbar-gutter: stable;
+  /* Evita que o modal "trema" ao surgir scroll */
 }
 
 /* AGRUPA ÍCONE + TEXTO */
@@ -783,9 +794,12 @@ body {
 /* Container do botão (opcional, mas recomendado) */
 .share-menu {
   position: absolute;
-  top: 12px;        /* distância do topo do card */
-  right: 12px;      /* distância da direita */
-  z-index: 10;      /* garante que fique na frente */
+  top: 12px;
+  /* distância do topo do card */
+  right: 12px;
+  /* distância da direita */
+  z-index: 10;
+  /* garante que fique na frente */
 }
 
 .share-menu button {
@@ -800,6 +814,7 @@ body {
   position: relative;
   z-index: 0;
 }
+
 /* Hover */
 .share-menu button:hover {
   background: rgba(255, 255, 255, 0.15);
@@ -1053,27 +1068,6 @@ html.light .socials img {
   filter: invert(0);
 }
 
-/* BOTÃO TEMA */
-.theme-btn {
-  display: block;
-  position: absolute;
-  top: 90%;
-  left: 73%;
-  transform: translateX(-50%);
-  padding: 9px 16px;
-  width: auto;
-  min-width: 132px;
-  max-width: 220px;
-  border-radius: 14px;
-  border: none;
-  color: #111;
-  background: var(--accent);
-  font-size: .78rem;
-  font-weight: 600;
-  cursor: pointer;
-  text-align: center;
-  transition: transform .2s ease, box-shadow .2s ease;
-}
 
 
 /*botão de ou/sepreferir */
@@ -1161,7 +1155,25 @@ html.light .socials img {
   color: var(--accent);
   font-weight: 600;
 }
+/* verão box */
+.versaobox {
+  position: absolute;
+  bottom: 2px; /* 👈 altura fixa e consistente */
+  left: 0;
+  right: 0;
 
+  text-align: center;
+  font-size: .7rem;
+  color: var(--muted);
+  opacity: .85;
+}
+
+.versaobox strong {
+  display: block;
+  font-size: .8rem;
+  color: var(--accent);
+  font-weight: 600;
+}
 
 
 
@@ -2028,53 +2040,6 @@ mark {
   /* Vermelho ao passar o mouse */
 }
 
-/* Ajuste no conteúdo para o botão não esmagar o texto */
-.toast-content {
-  padding: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  /* Garante espaço entre texto e botão */
-}
-
-/* TOAST */
-.toast-card {
-  position: fixed;
-  top: 30px;
-  right: -400px;
-  background: var(--card);
-  border-radius: 16px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-  width: 330px;
-  z-index: 999;
-  transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.toast-card.active {
-  right: 30px;
-}
-
-.toast-content {
-  padding: 18px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.icon-box {
-  background: rgba(250, 204, 21, 0.15);
-  color: var(--primary);
-  padding: 10px;
-  border-radius: 12px;
-  font-size: 20px;
-}
-
-.text-box strong {
-  display: block;
-  font-size: 14px;
-}
-
 .text-box p {
   margin: 0;
   font-size: 13px;
@@ -2204,12 +2169,115 @@ mark {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.tab-btn.active {
-  background: var(--accent-color);
-  color: white;
-  border-color: var(--accent-color);
-  box-shadow: 0 4px 15px rgba(61, 90, 254, 0.3);
+.tab-btn {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  background: color-mix(in srgb, var(--glass) 85%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border-color) 70%, transparent);
+  color: var(--text-dim);
+
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.35px;
+
+  padding: 11px 24px;
+  border-radius: 999px;
+
+  cursor: pointer;
+  user-select: none;
+
+  transition:
+    color .35s ease,
+    border-color .35s ease,
+    transform .25s ease;
 }
+
+/* ================= BACKGROUND DINÂMICO ================= */
+.tab-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(120deg,
+      transparent 0%,
+      var(--accent-color) 50%,
+      transparent 100%);
+  opacity: 0;
+  transform: translateX(-140%);
+  transition: transform .75s cubic-bezier(.4, 0, .2, 1),
+    opacity .35s ease;
+  z-index: -1;
+}
+
+/* ================= GLOW ================= */
+.tab-btn::after {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(circle at center,
+      var(--accent-color),
+      transparent 60%);
+  opacity: 0;
+  filter: blur(28px);
+  transition: opacity .45s ease;
+  z-index: -2;
+}
+
+/* ================= HOVER ================= */
+.tab-btn:hover {
+  color: var(--text);
+  border-color: var(--accent-color);
+  transform: translateY(-1.5px);
+}
+
+.tab-btn:hover::before {
+  opacity: .18;
+  transform: translateX(140%);
+}
+
+/* ================= ACTIVE ================= */
+.tab-btn.active {
+  color: #facc15;
+  border-color: transparent;
+  transform: translateY(-2px);
+  font-style: oblique;
+  font-size: 21px;
+}
+
+.tab-btn.active::before {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.tab-btn.active::after {
+  opacity: .6;
+}
+
+/* ================= UNDERLINE FLUÍDO ================= */
+.tab-btn span,
+.tab-btn {
+  --line-width: 0%;
+}
+
+.tab-btn::marker {
+  display: none;
+}
+
+.tab-btn.active {
+  --line-width: 70%;
+}
+
+.tab-btn::selection {
+  background: transparent;
+}
+
+/* ================= CLICK ================= */
+.tab-btn:active {
+  transform: scale(.95);
+}
+
 
 /* --- Conteúdo e Carrossel --- */
 .tab-content {
@@ -2477,3 +2545,29 @@ mark {
     0 6px 14px rgba(245, 158, 11, 0.45),
     0 0 0 3px rgba(245, 158, 11, 0.18);
 }
+
+/* sisteam de ia nova para divs */
+
+.badge-new-ia-count {
+  margin-left: 8px;
+  padding: 4px 10px;
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: #fff;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.badge-new-ia-count ion-icon {
+  font-size: 14px;
+}
+
+
+/*fim sisteam de ia nova para divs */

@@ -164,11 +164,6 @@ clearBtn.addEventListener("click", () => {
   searchInput.dispatchEvent(new KeyboardEvent("keyup"));
 });
 
-/* tema */
-function toggleTheme() {
-  document.body.classList.toggle("light");
-}
-
 // Prepara todos os <li>
 document.querySelectorAll(".card ul li").forEach((li) => {
   const img = li.querySelector("img");
@@ -290,10 +285,6 @@ function closeSidebar() {
 openBtn.onclick = openSidebar;
 closeBtn.onclick = closeSidebar;
 overlay.onclick = closeSidebar;
-
-document.getElementById("toggleTheme").onclick = () => {
-  html.classList.toggle("light");
-};
 
 const closeSidebarBtn = document.getElementById("closeSidebar");
 
@@ -465,95 +456,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 //fim modal das infomação
 
-//NOTIFICAÇÃO
-// Função para fechar o toast manualmente ao clicar no X
-function fecharToastManual() {
-  const toast = document.getElementById("toast");
-  toast.classList.remove("active");
-}
-
-// O restante do seu código JS continua igual,
-// mas agora você tem essa função extra para o botão.
-
-const toast = document.getElementById("toast");
-const bar = document.getElementById("bar");
-const modal = document.getElementById("modal");
-
-const TOAST_KEY = "toast_expire_date";
-const SHOW_DAYS = 30; // 👈 quantos dias o toast vai aparecer
-
-let toastTimer;
-
-/* ================= MOSTRAR TOAST ================= */
-function showToast(time = 5000) {
-  toast.classList.add("active");
-
-  bar.style.animation = "none";
-  bar.offsetHeight; // força reflow
-  bar.style.animation = `progress ${time}ms linear forwards`;
-  bar.style.animationPlayState = "running";
-
-  toastTimer = setTimeout(() => {
-    hideToast();
-  }, time);
-}
-
-/* ================= ESCONDER ================= */
-function hideToast() {
-  toast.classList.remove("active");
-}
-
-/* ================= CONTROLE POR DIAS ================= */
-function canShowToast() {
-  const saved = localStorage.getItem(TOAST_KEY);
-
-  if (!saved) {
-    const expire = new Date();
-    expire.setDate(expire.getDate() + SHOW_DAYS);
-    localStorage.setItem(TOAST_KEY, expire.toISOString());
-    return true;
-  }
-
-  const expireDate = new Date(saved);
-  const now = new Date();
-
-  return now <= expireDate; // só mostra se ainda estiver no prazo
-}
-
-/* ================= MODAL ================= */
-function abrirModal() {
-  hideToast();
-  modal.style.display = "flex";
-}
-
-function fecharModal() {
-  modal.style.display = "none";
-}
-
-/* ================= PAUSAR NO HOVER ================= */
-toast.addEventListener("mouseenter", () => {
-  bar.style.animationPlayState = "paused";
-  clearTimeout(toastTimer);
-});
-
-toast.addEventListener("mouseleave", () => {
-  bar.style.animationPlayState = "running";
-  toastTimer = setTimeout(() => {
-    hideToast();
-  }, 1500);
-});
-
-/* ================= INICIAR ================= */
-window.onload = () => {
-  if (!canShowToast()) return; // ⛔ fora do prazo
-
-  setTimeout(() => {
-    showToast(6000); // tempo visível
-  }, 1200);
-};
-
-//fim NOTIFICAÇÃO
-
 ///card altas
 // #1. Lógica de Troca de Abas
 const buttons = document.querySelectorAll(".tab-btn");
@@ -622,3 +524,40 @@ sliders.forEach((slider) => {
 });
 
 ///fim card altas
+//sisteam de ia nova para divs
+
+document.addEventListener("DOMContentLoaded", () => {
+  const DAYS_AS_NEW = 30;
+  const today = new Date();
+
+  document.querySelectorAll(".card").forEach((card) => {
+    let count = 0;
+
+    card.querySelectorAll("ul li[data-new]").forEach((li) => {
+      const addedDate = new Date(li.dataset.new);
+      const diffDays = (today - addedDate) / (1000 * 60 * 60 * 24);
+
+      if (diffDays <= DAYS_AS_NEW) {
+        count++;
+      }
+    });
+
+    if (count > 0) {
+      const title = card.querySelector("h2");
+      if (!title) return;
+
+      if (title.querySelector(".badge-new-ia-count")) return;
+
+      const badge = document.createElement("span");
+      badge.className = "badge-new-ia-count";
+      badge.innerHTML = `
+        <ion-icon name="sparkles-outline"></ion-icon>
+        ${count} IA nova${count > 1 ? "s" : ""}
+      `;
+
+      title.appendChild(badge);
+    }
+  });
+});
+
+//fim de sisteam de ia nova para divs
