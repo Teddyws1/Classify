@@ -334,14 +334,8 @@ document.addEventListener("DOMContentLoaded", () => {
     warning.style.display = "flex";
     lockScroll();
 
-    // toca som
-    if (sound) {
-      sound.currentTime = 0;
-      sound.play().catch(() => {
-        // alguns navegadores bloqueiam som automático
-        console.warn("Som bloqueado pelo navegador.");
-      });
-    }
+   
+    
   }
 
   function hideWarning() {
@@ -404,30 +398,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 //fim sistema de novas ia com (li)
 
-//card coisas novas
-document.addEventListener("DOMContentLoaded", () => {
-  const CARD_KEY = "new_feature_seen_v1";
 
-  const card = document.getElementById("newFeatureCard");
-  const closeBtn = document.getElementById("closeFeatureCard");
-
-  // se não existir o card, não faz nada (evita erro)
-  if (!card || !closeBtn) return;
-
-  // mostra só se ainda não foi visto
-  if (!localStorage.getItem(CARD_KEY)) {
-    setTimeout(() => {
-      card.classList.remove("hidden");
-    }, 800);
-  }
-
-  // ao fechar
-  closeBtn.addEventListener("click", () => {
-    card.classList.add("hidden");
-    localStorage.setItem(CARD_KEY, "true");
-  });
-});
-//fim card coisas novas
 
 //modal das infomação
 document.addEventListener("DOMContentLoaded", () => {
