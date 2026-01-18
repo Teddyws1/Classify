@@ -2533,123 +2533,125 @@ h2 {
   font-size: 18px;}
 
 /* aviod de atuallização */
-/* CARD */
-/* CONTAINER DESTAQUE */
-.novidades-destaque {
-  position: relative;
+/* Overlay escuro */
+#update-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.85);
+  backdrop-filter: blur(6px);
   display: flex;
   align-items: center;
-  gap: 16px;
+  justify-content: center;
+  z-index: 9999;
+}
 
-  padding: 18px 22px;
-  max-width: 460px;
-
-  background: var(--bg-input);
-  border: 1px solid var(--border);
+/* Modal */
+.update-modal {
+  position: relative;
+  width: 90%;
+  max-width: 420px;
+  padding: 28px 22px;
+  background: linear-gradient(145deg, #02061700, #0f172a00);
   border-radius: 18px;
-
-  box-shadow: 0 15px 40px var(--shadow);
+  text-align: center;
+  color: #e5e7eb;
+  border: 1px solid #1e293b;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+  animation: modalIn 0.6s ease;
   overflow: hidden;
 }
 
-/* FUNDO ANIMADO */
-.glow-bg {
+/* Brilho */
+.update-glow {
   position: absolute;
   inset: -40%;
-  background: radial-gradient(
-    circle,
-    var(--accent) 0%,
-    transparent 60%
-  );
-  opacity: 0.15;
-  animation: glowMove 6s linear infinite;
+  background: radial-gradient(circle, rgba(250, 204, 21, 0), transparent 60%);
+  animation: glowPulse 4s ease-in-out infinite;
 }
 
-/* TEXTO */
-#novidades {
+/* Emoji */
+.update-emoji {
+  width: 78px;
+  margin-bottom: 12px;
+  animation: bounce 2s infinite;
   position: relative;
-  margin: 0;
+  z-index: 1;
+}
+
+/* Textos */
+.update-modal h2 {
+  color: #facc15;
+  font-size: 1.3rem;
+  margin: 10px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.update-date {
+  color: #38bdf8;
+  margin: 10px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.update-text {
   font-size: 0.95rem;
-  line-height: 1.5;
-  color: var(--muted);
+  color: #cbd5f5;
+  margin: 8px 0;
+  position: relative;
   z-index: 1;
 }
 
-/* IMAGEM */
-.novidades-img {
-  width: 44px;
-  height: 44px;
-  flex-shrink: 0;
+.update-warning {
+  margin-top: 14px;
+  padding: 12px;
+  background: rgba(250, 204, 21, 0);
+  border: 1px dashed #facc15;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  color: #fde68a;
+  position: relative;
   z-index: 1;
 }
 
-/* ANIMAÇÕES */
-.animada {
-  animation: pulse 2.5s ease-in-out infinite,
-             bounce 3.5s ease-in-out infinite;
+/* Botão */
+.update-btn {
+  margin-top: 16px;
+  padding: 10px 22px;
+  border: none;
+  border-radius: 10px;
+  background: #facc15;
+  color: #020617;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  z-index: 1;
 }
 
-/* PULSE */
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
+.update-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(250,204,21,0.4);
+}
+
+/* Animações */
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.85) translateY(20px);
   }
-  50% {
-    transform: scale(1.12);
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
   }
 }
 
-/* BOUNCE SUAVE */
 @keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-6px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
 
-/* FUNDO MOVENDO */
-@keyframes glowMove {
-  0% {
-    transform: translate(0, 0);
-  }
-  50% {
-    transform: translate(20%, 10%);
-  }
-  100% {
-    transform: translate(0, 0);
-  }
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
 }
-.novidades-card {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-
-  padding: 16px 18px;
-  max-width: 420px;
-
-  background: var(--bg-input);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-
-  box-shadow: 0 10px 25px var(--shadow);
-}
-
-.novidades-img {
-  width: 42px;
-  height: 42px;
-  flex-shrink: 0;
-}
-
-#novidades {
-  margin: 0;
-  font-size: 0.95rem;
-  line-height: 1.5;
-  color: var(--muted);
-}
-
-#novidades strong {
-  color: var(--accent);
-}
-
