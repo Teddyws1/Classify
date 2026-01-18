@@ -532,3 +532,79 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 //fim de sisteam de ia nova para divs
+
+//card de aviso
+document.addEventListener("DOMContentLoaded", () => {
+  const card = document.getElementById("updateCard");
+  const openBtn = document.getElementById("openBtn");
+  const closeBtn = document.getElementById("closeBtn");
+
+  // Estado inicial
+  card.style.display = "block";
+  openBtn.style.display = "none";
+
+  function closeUpdate() {
+    card.style.opacity = "0";
+    card.style.transform = "translateY(20px)";
+
+    setTimeout(() => {
+      card.style.display = "none";
+      openBtn.style.display = "block";
+    }, 300);
+  }
+
+  function openUpdate() {
+    card.style.display = "block";
+    card.style.opacity = "0";
+    card.style.transform = "translateY(20px)";
+
+    setTimeout(() => {
+      card.style.opacity = "1";
+      card.style.transform = "translateY(0)";
+    }, 10);
+
+    openBtn.style.display = "none";
+  }
+
+  closeBtn.addEventListener("click", closeUpdate);
+  openBtn.addEventListener("click", openUpdate);
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const card = document.getElementById("updateCard");
+  const closeBtn = document.getElementById("closeBtn");
+  const openBtn = document.getElementById("openBtn");
+
+  // animação inicial
+  setTimeout(() => {
+    card.style.transition = "opacity .4s ease, transform .4s ease";
+    card.style.opacity = "1";
+    card.style.transform = "translateY(0)";
+  }, 100);
+
+  // FECHAR
+  closeBtn.addEventListener("click", () => {
+    card.style.opacity = "0";
+    card.style.transform = "translateY(20px)";
+
+    setTimeout(() => {
+      card.style.display = "none";
+      openBtn.style.display = "block";
+    }, 300);
+  });
+
+  // ABRIR
+  openBtn.addEventListener("click", () => {
+    card.style.display = "block";
+
+    setTimeout(() => {
+      card.style.opacity = "1";
+      card.style.transform = "translateY(0)";
+    }, 10);
+
+    openBtn.style.display = "none";
+  });
+});
+
+
+
