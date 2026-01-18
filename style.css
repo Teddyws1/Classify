@@ -2534,95 +2534,6 @@ h2 {
 
 /* aviod de atuallização */
 /* CARD */
-.update-card {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-
-  width: 330px;
-  padding: 22px;
-
-  background: var(--bg-input);
-  color: var(--text);
-
-  border-radius: 16px;
-  border: 1px solid var(--border);
-  box-shadow: 0 15px 35px var(--shadow);
-
-  z-index: 999;
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-/* BADGE */
-.update-badge {
-  position: absolute;
-  top: -12px;
-  right: 16px;
-
-  background: var(--accent);
-  color: var(--text-dark);
-
-  padding: 5px 12px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  border-radius: 999px;
-}
-
-/* TEXTO */
-.update-card h2 {
-  margin: 10px 0;
-  font-size: 1.25rem;
-  color: var(--accent);
-}
-
-.update-card p {
-  font-size: 0.95rem;
-  color: var(--muted);
-  line-height: 1.4;
-}
-
-/* BOTÃO FECHAR */
-.update-close {
-  margin-top: 14px;
-  width: 100%;
-  padding: 10px;
-
-  border-radius: 10px;
-  border: none;
-
-  background: #facc15;
-  color: #000000;
-
-  font-weight: 600;
-  cursor: pointer;
-  transition: opacity .2s ease;
-}
-
-.update-close:hover {
-  opacity: .85;
-}
-
-/* BOTÃO ABRIR */
-.update-open {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-
-  padding: 10px 14px;
-  border-radius: 999px;
-
-  background: var(--accent);
-  color: var(--text-dark);
-
-  border: none;
-  font-weight: 700;
-  cursor: pointer;
-
-  display: none;
-  box-shadow: 0 8px 20px var(--shadow);
-  z-index: 998;
-}
 /* CONTAINER DESTAQUE */
 .novidades-destaque {
   position: relative;
@@ -2710,3 +2621,35 @@ h2 {
     transform: translate(0, 0);
   }
 }
+.novidades-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  padding: 16px 18px;
+  max-width: 420px;
+
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+
+  box-shadow: 0 10px 25px var(--shadow);
+}
+
+.novidades-img {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+}
+
+#novidades {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+#novidades strong {
+  color: var(--accent);
+}
+
