@@ -540,3 +540,90 @@ function fecharAviso() {
   window.addEventListener('load', () => {
     document.getElementById('update-overlay').style.display = 'flex';
   });
+
+  //recresiva
+  window.onload = function() {
+    const widget = document.getElementById('regressive-widget');
+    const overlay = document.getElementById('image-overlay');
+    const closeBtn = document.getElementById('btn-close-widget');
+    const targetDate = new Date('February 02, 2026 00:00:00').getTime();
+
+    let isDragging = false;
+    let dragDistance = 0; // Para medir se o usuário moveu ou só clicou
+    let offset = { x: 0, y: 0 };
+
+    // --- 1. Lógica do Cronômetro ---
+    function updateTimer() {
+        const now = new Date().getTime();
+        const diff = targetDate - now;
+        if (diff <= 0) return;
+
+        document.getElementById('days-val').innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+        document.getElementById('hours-val').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+        document.getElementById('minutes-val').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+        document.getElementById('seconds-val').innerText = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
+    }
+    setInterval(updateTimer, 1000);
+    updateTimer();
+
+    // --- 2. Eventos de Arrastar e Clique ---
+    const start = (e) => {
+        if (e.target === closeBtn) return;
+        isDragging = true;
+        dragDistance = 0; // Reseta a distância ao tocar
+        const ev = e.type.includes('touch') ? e.touches[0] : e;
+        offset.x = ev.clientX - widget.getBoundingClientRect().left;
+        offset.y = ev.clientY - widget.getBoundingClientRect().top;
+        widget.style.transition = 'none';
+    };
+
+    const move = (e) => {
+        if (!isDragging) return;
+        const ev = e.type.includes('touch') ? e.touches[0] : e;
+        
+        let x = ev.clientX - offset.x;
+        let y = ev.clientY - offset.y;
+
+        // Soma a distância movida para saber se é um arraste real
+        dragDistance += Math.abs(ev.clientX - (x + offset.x)) + Math.abs(ev.clientY - (y + offset.y));
+
+        x = Math.max(0, Math.min(x, window.innerWidth - widget.offsetWidth));
+        y = Math.max(0, Math.min(y, window.innerHeight - widget.offsetHeight));
+
+        widget.style.left = x + 'px';
+        widget.style.top = y + 'px';
+        widget.style.bottom = 'auto';
+        widget.style.right = 'auto';
+    };
+
+    const stop = (e) => {
+        isDragging = false;
+    };
+
+    // --- 3. Lógica do Clique Duplo (Blindada) ---
+    widget.addEventListener('dblclick', () => {
+        // Só abre se não tiver arrastado o widget para longe
+        if (dragDistance < 10) { 
+            overlay.classList.remove('hidden');
+        }
+    });
+
+    // Fechar botão e overlay
+    closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        widget.style.display = 'none';
+    });
+
+    overlay.addEventListener('click', () => {
+        overlay.classList.add('hidden');
+    });
+
+    // Listeners
+    widget.addEventListener('mousedown', start);
+    document.addEventListener('mousemove', move);
+    document.addEventListener('mouseup', stop);
+    
+    widget.addEventListener('touchstart', start, { passive: false });
+    document.addEventListener('touchmove', move, { passive: false });
+    document.addEventListener('touchend', stop);
+};
